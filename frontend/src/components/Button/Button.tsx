@@ -18,7 +18,7 @@ export default function Button({
     <button
       onClick={onClick}
       className={clsx({
-        "bg-[#0D6EB5] rounded-xl flex py-3 px-6 gap-3 items-center hover:bg-[#0a5890]":
+        "bg-[#0D6EB5] h-16 rounded-xl flex py-3 px-6 gap-3 items-center hover:bg-[#0a5890]":
           true,
         "bg-[#2c2c2c] hover:bg-[#000000]": primary,
       })}
