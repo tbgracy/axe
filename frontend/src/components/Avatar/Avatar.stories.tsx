@@ -1,4 +1,12 @@
+import { User } from "../../types/user";
 import Avatar from "./Avatar";
+
+const user: User = {
+  id: "jflksjdlkjfd",
+  username: "tbgracy",
+  email: "gtsierenana@gmail.com",
+  profilePicturePath: "/pdp.png",
+};
 
 export default {
   title: "Avatar",
@@ -11,12 +19,7 @@ export default {
 export const Default = {
   args: {
     expanded: true,
-    user: {
-      id: "jflksjdlkjfd",
-      username: "tbgracy",
-      email: "gtsierenana@gmail.com",
-      profilePicturePath: "/pdp.png",
-    },
+    user: user,
   },
 };
 

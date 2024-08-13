@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { User } from "../../types/user";
 
 type AvatarProps = {
@@ -11,9 +12,15 @@ export default function Avatar({ user, expanded = true }: AvatarProps) {
       <img
         src={user?.profilePicturePath ?? "/avatar-placeholder.jpg"}
         alt="user profile picture"
-        className="rounded-full size-14 object-cover"
+        className={clsx({
+          "rounded-full object-cover": true,
+          "size-12": !expanded,
+          "size-14": expanded,
+        })}
       />
-      {(expanded && Boolean(user)) && <p className="text-white">{user?.username}</p>}
+      {expanded && Boolean(user) && (
+        <p className="text-white">{user?.username}</p>
+      )}
     </div>
   );
 }
