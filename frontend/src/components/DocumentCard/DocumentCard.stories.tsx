@@ -1,3 +1,4 @@
+import { fn } from "@storybook/test";
 import { TextDocument } from "../../types";
 import DocumentCard from "./DocumentCard";
 
@@ -25,5 +26,8 @@ export default {
 export const Default = {
   args: {
     document,
+    onDelete: fn(),
+    onOpen: fn(),
+    onShare: fn(),
   },
 };
