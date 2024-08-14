@@ -8,7 +8,12 @@ type AvatarProps = {
 
 export default function Avatar({ user, expanded = true }: AvatarProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div
+      className={clsx({
+        "flex items-center gap-3": true,
+        "w-full": expanded,
+      })}
+    >
       <img
         src={user?.profilePicturePath ?? "/avatar-placeholder.jpg"}
         alt="user profile picture"
