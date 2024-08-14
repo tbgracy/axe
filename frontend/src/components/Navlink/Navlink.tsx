@@ -26,6 +26,7 @@ export default function Navlink({
         "text-[#cdcdcd]": !current,
         "justify-center ": !expanded,
       })}
+      title={!expanded ? children?.toString() : ""}
     >
       {icon}
       {expanded && <p>{children}</p>}
