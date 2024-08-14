@@ -2,12 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    colors: {
-      blue: "#0D6EB5",
-      white: '#fff',
-      red: '#E23131'
+    extend: {
+      colors: {
+        primary: "#0D6EB5",
+        warning: "#E23131",
+      },
     },
-    extend: {},
     fontFamily: {
       sans: ["Inter"],
     },
