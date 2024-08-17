@@ -18,9 +18,6 @@ const document: TextDocument = {
 export default {
   title: "DocumentCard",
   component: DocumentCard,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Default = {

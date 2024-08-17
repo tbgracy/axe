@@ -4,9 +4,6 @@ import ThemeSwitch from "./ThemeSwitch";
 export default {
   title: "ThemeSwitch",
   component: ThemeSwitch,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Default = {

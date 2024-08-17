@@ -1,19 +1,17 @@
 import Navlink from ".";
 import { Settings } from "@mui/icons-material";
+import { fn } from "@storybook/test";
 
 export default {
   title: "Navlink",
   component: Navlink,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Default = {
   args: {
     icon: <Settings htmlColor="#cdcdcd" />,
     children: "Paramètres",
-    target: "/settings",
+    onClick: fn(),
     current: false,
   },
 };

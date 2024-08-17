@@ -7,9 +7,6 @@ export default {
   title: "Button",
   component: Button,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Primary = {

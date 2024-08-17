@@ -11,9 +11,6 @@ const user: User = {
 export default {
   title: "Avatar",
   component: Avatar,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Default = {

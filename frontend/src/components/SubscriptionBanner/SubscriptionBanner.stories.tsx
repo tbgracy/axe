@@ -4,9 +4,6 @@ import SubscriptionBanner from "./SubscriptionBanner";
 export default {
   title: "Subscription Banner",
   component: SubscriptionBanner,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export const Default = {
