@@ -20,5 +20,5 @@ export function useMenuOpen(menuRef: React.RefObject<HTMLDivElement>) {
     setOpen(!open);
   }
 
-  return { handleClick, open };
+  return { handleClick, open, setOpen };
 }
