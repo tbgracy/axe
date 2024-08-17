@@ -9,14 +9,14 @@ export default function SubscriptionBanner({
   onClose: () => void;
   onSeeDetails: () => void;
 }) {
+  const message =
+    "Souscrivez à notre offre premium pour bénéficier d'une meilleure expérience.";
+
   return (
-    <div className="relative bg-primary rounded-[20px] w-[556px/2] h-[170px] p-4 flex gap-4">
+    <div className="relative bg-primary rounded-[20px] w-fit h-[170px] p-4 flex gap-4">
       <img src={img} className="h-full" />
       <div className="flex flex-col items-end justify-between">
-        <p className="font-bold text-white text-lg">
-          Souscrivez à notre offre premium pour bénéficier d'une meilleure
-          expérience.
-        </p>
+        <p className="font-bold text-white text-lg w-96">{message}</p>
         <Button onClick={onSeeDetails} icon={<Launch htmlColor="white" />}>
           Voir plus de détails
         </Button>
