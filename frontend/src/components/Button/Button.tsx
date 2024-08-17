@@ -4,7 +4,7 @@ import clsx from "clsx";
 type ButtonProps = {
   icon?: ReactNode;
   onClick: () => void;
-  primary: boolean;
+  primary?: boolean;
   children: ReactNode;
 };
 
@@ -18,9 +18,9 @@ export default function Button({
     <button
       onClick={onClick}
       className={clsx({
-        "bg-[#0D6EB5] h-16 rounded-xl flex py-3 px-6 gap-3 items-center hover:bg-[#0a5890]":
-          true,
-        "bg-[#2c2c2c] hover:bg-[#000000]": primary,
+        "h-16 rounded-xl flex py-3 px-6 gap-3 items-center": true,
+        "bg-[#2c2c2c] hover:bg-[#000000]": !primary,
+        "bg-[#0D6EB5] hover:bg-[#0a5890]": primary,
       })}
     >
       {icon}

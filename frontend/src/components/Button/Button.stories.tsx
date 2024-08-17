@@ -11,7 +11,7 @@ export default {
 
 export const Primary = {
   args: {
-    primary: false,
+    primary: true,
     children: "Créer un document",
     icon: <Add htmlColor="white" />,
     onClick: fn(),
