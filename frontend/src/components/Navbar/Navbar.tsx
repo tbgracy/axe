@@ -17,45 +17,56 @@ import { User } from "../../types/user";
 
 type ThemeMode = "dark" | "light";
 
-export default function Navbar({ user }: { user?: User }) {
-  const [mode, setMode] = useState<ThemeMode>("dark");
+type NavbarProps = {
+  user?: User;
+  themeMode: ThemeMode;
+  onGoBack: () => void;
+  onGoToHelp: () => void;
+  onGoToSessionManager: () => void;
+  onGoToSettings: () => void;
+  onGoToAbout: () => void;
+  onSwitchTheme: () => void;
+};
+
+export default function Navbar({
+  user,
+  themeMode,
+  onGoBack,
+  onGoToHelp,
+  onGoToSessionManager,
+  onGoToSettings,
+  onGoToAbout,
+  onSwitchTheme,
+}: NavbarProps) {
   const [expanded, setExpanded] = useState<boolean>(true);
   const linksData = [
     {
       icon: <ArrowBackIosNew />,
-      target: "#",
+      onClick: onGoBack,
       label: "Retour",
     },
     {
       icon: <Help />,
       current: true,
-      target: "#",
+      onClick: onGoToHelp,
       label: "Aide",
     },
     {
       icon: <JoinInner />,
-      target: "#",
+      onClick: onGoToSessionManager,
       label: "Gestion de session",
     },
     {
       icon: <Settings />,
-      target: "#",
+      onClick: onGoToSettings,
       label: "Paramètres",
     },
     {
       icon: <Info />,
-      target: "#",
+      onClick: onGoToAbout,
       label: "À propos",
     },
   ];
-
-  function handleThemeSwitch() {
-    if (mode === "dark") {
-      setMode("light");
-    } else {
-      setMode("dark");
-    }
-  }
 
   function handleExpansion() {
     setExpanded(!expanded);
@@ -80,7 +91,7 @@ export default function Navbar({ user }: { user?: User }) {
             <Navlink
               expanded={expanded}
               icon={link.icon}
-              target={link.target}
+              onClick={link.onClick}
               current={link.current}
             >
               {link.label}
@@ -91,8 +102,8 @@ export default function Navbar({ user }: { user?: User }) {
       <div className="flex mt-[auto] items-center flex-col p-4 gap-4">
         <ThemeSwitch
           expanded={expanded}
-          mode={mode}
-          onClick={handleThemeSwitch}
+          mode={themeMode}
+          onClick={onSwitchTheme}
         />
         <Avatar expanded={expanded} user={user} />
       </div>

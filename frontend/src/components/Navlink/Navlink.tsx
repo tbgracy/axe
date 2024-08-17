@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import clsx from "clsx";
 
 type NavlinkProps = {
-  target: string;
+  onClick: () => void;
   icon: ReactNode;
   current?: boolean;
   expanded?: boolean;
@@ -10,15 +10,15 @@ type NavlinkProps = {
 };
 
 export default function Navlink({
-  target,
+  onClick,
   icon,
   current = false,
   expanded = true,
   children,
 }: NavlinkProps) {
   return (
-    <a
-      href={target}
+    <div
+      onClick={onClick}
       className={clsx({
         "flex font-bold gap-2 hover:bg-[rgba(255,255,255,0.14)] py-2 px-4 cursor-pointer":
           true,
@@ -29,7 +29,7 @@ export default function Navlink({
       title={!expanded ? children?.toString() : ""}
     >
       {icon}
-      {expanded && <p>{children}</p>}
-    </a>
+      {expanded && <p className="select-none">{children}</p>}
+    </div>
   );
 }
