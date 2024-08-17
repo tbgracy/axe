@@ -1,6 +1,7 @@
 import { MoreVert, Launch, Share, Delete } from "@mui/icons-material";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { DocumentCardProps } from "./DocumentCard";
+import { useMenuOpen } from "./hooks";
 
 export default function Menu({
   document,
@@ -8,25 +9,9 @@ export default function Menu({
   onOpen,
   onShare,
 }: DocumentCardProps) {
-  const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
-    window.document.addEventListener("mousedown", handleClickOutside);
-
-    return () =>
-      window.document.removeEventListener("mousedown", handleClickOutside);
-  });
-
-  function handleClick() {
-    setOpen(!open);
-  }
+  const { handleClick, open } = useMenuOpen(menuRef);
 
   const menuItemClass = "flex gap-2 hover:bg-gray-200 p-2 rounded-[10px]";
 
@@ -49,7 +34,6 @@ export default function Menu({
               id="share"
               type="checkbox"
               checked={document.shared}
-              onClick={(e) => e.preventDefault()}
               className="cursor-pointer"
             />
           </li>
