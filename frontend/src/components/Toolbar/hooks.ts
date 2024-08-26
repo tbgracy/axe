@@ -1,4 +1,5 @@
 import { Editor } from "@tiptap/react";
+import { HeadingLevel } from "./Toolbar";
 
 export function usePrint() {
   function handlePrint() {}
@@ -28,11 +29,16 @@ export function useTextFormat(editor: Editor) {
     editor.chain().focus().setColor(color).run();
   }
 
+  function handleHeadingChange(level: HeadingLevel) {
+    editor.chain().focus().toggleHeading({ level }).run();
+  }
+
   return {
     handleFormatBold,
     handleFormatItalic,
     handleUnderline,
     handleFontChange,
     handleColorChange,
+    handleHeadingChange,
   };
 }

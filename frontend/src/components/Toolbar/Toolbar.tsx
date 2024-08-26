@@ -22,6 +22,8 @@ function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
 }
 
+export type HeadingLevel = 1 | 2 | 3 | 4;
+
 export type ToolbarProps = {
   document: TextDocument;
   currentColor: string;
@@ -35,6 +37,7 @@ export type ToolbarProps = {
   onFormatBold: () => void;
   onFormatItalic: () => void;
   onFormatUnderline: () => void;
+  onHeadingChange: (level: HeadingLevel) => void;
 };
 
 const fontFamilies = ["Inter", "Galada", "Nunito", "Montserrat"];
@@ -44,6 +47,7 @@ export default function Toolbar({
   onFormatItalic,
   onFormatUnderline,
   onChangeFont,
+  onHeadingChange,
   onChangeColor,
   currentColor,
   onDelete,
@@ -103,11 +107,16 @@ export default function Toolbar({
         onChange={(e) => onChangeColor(e.target.value)}
       />
       <HorizontalSeparator />
-      <select name="" id="" className={dropdownStyle}>
-        <option value="">Titre 1</option>
-        <option value="">Titre 2</option>
-        <option value="">Sous-titre</option>
-        <option value="">Normal</option>
+      <select
+        onChange={(e) =>
+          onHeadingChange(Number.parseInt(e.target.value) as HeadingLevel)
+        }
+        className={dropdownStyle}
+      >
+        <option value="1">Titre 1</option>
+        <option value="2">Titre 2</option>
+        <option value="3">Titre 3</option>
+        <option value="4">Titre 4</option>
       </select>
       <ToolbarButton icon={<FormatAlignCenter />} onClick={() => {}} />
       <ToolbarButton icon={<FormatAlignJustify />} onClick={() => {}} />

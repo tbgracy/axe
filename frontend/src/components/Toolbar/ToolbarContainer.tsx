@@ -18,6 +18,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
     handleUnderline,
     handleFontChange,
     handleColorChange,
+    handleHeadingChange,
   } = useTextFormat(editor!);
   const currentColor = editor?.getAttributes("textStyle").color;
 
@@ -32,6 +33,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
       onMoreInfo={() => {}}
       onChangeFont={handleFontChange}
       onChangeColor={handleColorChange}
+      onHeadingChange={handleHeadingChange}
       onFormatBold={handleFormatBold}
       onFormatItalic={handleFormatItalic}
       onFormatUnderline={handleUnderline}
