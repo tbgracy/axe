@@ -1,3 +1,4 @@
+import { fn } from "@storybook/test";
 import Header from "./Header";
 
 export default {
@@ -10,6 +11,10 @@ export const Default = {
     layout: "padded",
   },
   args: {
+    children: [],
+    onUndo: fn(),
+    onRedo: fn(),
+    syncState: "syncing",
     users: [
       {
         id: "1",

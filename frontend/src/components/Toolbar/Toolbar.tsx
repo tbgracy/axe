@@ -28,9 +28,16 @@ export type ToolbarProps = {
   onExport: () => void;
   onPrint: () => void;
   onMoreInfo: () => void;
+  onChangeFont: () => void;
+  onFormatBold: () => void;
+  onFormatItalic: () => void;
+  onFormatUnderline: () => void;
 };
 
 export default function Toolbar({
+  onFormatBold,
+  onFormatItalic,
+  onFormatUnderline,
   onDelete,
   onShare,
   onExport,
@@ -39,7 +46,7 @@ export default function Toolbar({
 }: ToolbarProps) {
   const dropdownStyle = "p-2 rounded-[10px] cursor-pointer bg-gray-200";
   return (
-    <div className="flex items-center rounded-[20px] w-fit m-auto border border-[#d8d8d8] py-2 px-4 gap-1 bg-white">
+    <div className="flex items-center rounded-[20px] w-fit m-auto h-[4rem] border border-[#d8d8d8] py-2 px-4 gap-1 bg-white">
       <select name="" id="" className={dropdownStyle}>
         <option value="">Times New Roman</option>
         <option value="">Helvetica</option>
@@ -47,17 +54,17 @@ export default function Toolbar({
       <ToolbarButton
         tooltip={"Gras"}
         icon={<FormatBold />}
-        onClick={() => {}}
+        onClick={onFormatBold}
       />
       <ToolbarButton
         tooltip={"Italique"}
         icon={<FormatItalic />}
-        onClick={() => {}}
+        onClick={onFormatItalic}
       />
       <ToolbarButton
         tooltip={"Souligner"}
         icon={<FormatUnderlined />}
-        onClick={() => {}}
+        onClick={onFormatUnderline}
       />
       <ToolbarButton
         tooltip={"Couleur du texte"}

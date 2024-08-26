@@ -1,26 +1,58 @@
-import { CloudDone, Redo, Undo } from "@mui/icons-material";
+import { clsx } from "clsx";
+
+import { Redo, Undo } from "@mui/icons-material";
 import DocumentTitle from "../DocumentTitle";
 import Toolbar from "../Toolbar";
 import UserRow from "../UserRow";
-import { User } from "../../types";
+import { TextDocument, User } from "../../types";
+import SyncStateComponent, { SyncState } from "./SynStateComponent";
 
-type HeaderProps = {
+export type HeaderProps = {
   users: User[];
-  document: Document;
+  document: TextDocument;
+  onUndo?: () => void;
+  onRedo?: () => void;
+  syncState: SyncState;
 };
 
-export default function Header({ users, document }: HeaderProps) {
+export default function Header({
+  users,
+  document,
+  onRedo,
+  onUndo,
+  syncState,
+}: HeaderProps) {
   return (
-    <div className="bg-white w-full p-4 space-y-4 h-[110px] mb-[55px] relative">
-      <div className="flex items-center gap-2">
+    <div className="bg-white w-full p-4 space-y-4 relative border-b">
+      <div className="flex items-center gap-4">
         <DocumentTitle title={document.title} />
-        <Undo />
-        <Redo />
-        <CloudDone className="mr-auto" />
+        <div className="flex gap-1">
+          <div
+            className={clsx({
+              "cursor-pointer hover:text-primary": onUndo !== undefined,
+              "cursor-not-allowed text-gray-400": onUndo === undefined,
+            })}
+            onClick={onUndo}
+          >
+            <Undo />
+          </div>
+          <div
+            className={clsx({
+              "cursor-pointer hover:text-primary": onRedo !== undefined,
+              "cursor-not-allowed text-gray-400": onRedo === undefined,
+            })}
+            onClick={onRedo}
+          >
+            <Redo />
+          </div>
+        </div>
+        <div className="mr-auto">
+          <SyncStateComponent syncState={syncState} />
+        </div>
         <UserRow users={users} />
       </div>
       <div className="">
-        <Toolbar />
+        <Toolbar document={document} />
       </div>
     </div>
   );

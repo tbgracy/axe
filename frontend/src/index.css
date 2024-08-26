@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.ProseMirror:focus {
+    outline: none;
+}
+
 @layer base {
     @font-face {
         font-family: 'Inter';
