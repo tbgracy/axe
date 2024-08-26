@@ -11,7 +11,7 @@ import { TextDocument } from "../../types";
 export function ToolbarContainer({ document }: { document: TextDocument }) {
   const editor = useContext(EditorContext);
 
-  const { handlePrint } = usePrint();
+  const { handlePrint } = usePrint(editor!);
 
   const {
     handleFormatBold,
