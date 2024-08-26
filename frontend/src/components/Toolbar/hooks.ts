@@ -1,3 +1,4 @@
+import { Editor } from "@tiptap/react";
 
 export function usePrint() {
   function handlePrint() {}
@@ -6,12 +7,32 @@ export function usePrint() {
 
 export function useDocumentTools() {}
 
-export function useTextFormat() {
-  function formatBold() {}
+export function useTextFormat(editor: Editor) {
+  function handleFormatBold() {
+    editor.chain().focus().toggleBold().run();
+  }
 
-  function formatItalic() {}
+  function handleFormatItalic() {
+    editor.chain().focus().toggleItalic().run();
+  }
 
-  function formatUnderline() {}
+  function handleUnderline() {
+    editor.chain().focus().toggleUnderline().run();
+  }
 
-  return { formatBold, formatItalic, formatUnderline };
+  function handleFontChange(fontFamily: string) {
+    editor.chain().focus().setFontFamily(fontFamily).run();
+  }
+
+  function handleColorChange(color: string) {
+    editor.chain().focus().setColor(color).run();
+  }
+
+  return {
+    handleFormatBold,
+    handleFormatItalic,
+    handleUnderline,
+    handleFontChange,
+    handleColorChange,
+  };
 }

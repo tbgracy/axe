@@ -16,6 +16,7 @@ import {
 import Menu from "./Menu";
 import { TextDocument } from "../../types";
 import ToolbarButton from "./ToolbarButton";
+import { useRef } from "react";
 
 function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
@@ -23,21 +24,28 @@ function HorizontalSeparator() {
 
 export type ToolbarProps = {
   document: TextDocument;
+  currentColor: string;
   onDelete: () => void;
   onShare: () => void;
   onExport: () => void;
   onPrint: () => void;
   onMoreInfo: () => void;
-  onChangeFont: () => void;
+  onChangeFont: (fontFamily: string) => void;
+  onChangeColor: (newColor: string) => void;
   onFormatBold: () => void;
   onFormatItalic: () => void;
   onFormatUnderline: () => void;
 };
 
+const fontFamilies = ["Inter", "Galada", "Nunito", "Montserrat"];
+
 export default function Toolbar({
   onFormatBold,
   onFormatItalic,
   onFormatUnderline,
+  onChangeFont,
+  onChangeColor,
+  currentColor,
   onDelete,
   onShare,
   onExport,
@@ -45,11 +53,25 @@ export default function Toolbar({
   onMoreInfo,
 }: ToolbarProps) {
   const dropdownStyle = "p-2 rounded-[10px] cursor-pointer bg-gray-200";
+  const colorInputRef = useRef<HTMLInputElement>(null);
+
+  function handleColorChange() {
+    colorInputRef.current?.click();
+  }
+
   return (
     <div className="flex items-center rounded-[20px] w-fit m-auto h-[4rem] border border-[#d8d8d8] py-2 px-4 gap-1 bg-white">
-      <select name="" id="" className={dropdownStyle}>
-        <option value="">Times New Roman</option>
-        <option value="">Helvetica</option>
+      <select
+        name=""
+        id=""
+        className={`w-[6rem] ${dropdownStyle}`}
+        onChange={(e) => onChangeFont(e.currentTarget.value)}
+      >
+        {fontFamilies.map((f) => (
+          <option key={f} value={f} style={{ fontFamily: f }}>
+            {f}
+          </option>
+        ))}
       </select>
       <ToolbarButton
         tooltip={"Gras"}
@@ -67,23 +89,19 @@ export default function Toolbar({
         onClick={onFormatUnderline}
       />
       <ToolbarButton
-        tooltip={"Couleur du texte"}
+        tooltip={"Changer la couleur du text"}
+        color={currentColor}
         icon={<FormatColorText />}
-        onClick={() => {}}
+        onClick={handleColorChange}
       />
-      <select
-        title="Taille de la police"
-        className={dropdownStyle}
+      <input
+        ref={colorInputRef}
+        type="color"
         name=""
+        hidden
         id=""
-      >
-        <option value="">8</option>
-        <option value="">16</option>
-        <option value="">20</option>
-        <option value="">24</option>
-        <option value="">40</option>
-        <option value="">32</option>
-      </select>
+        onChange={(e) => onChangeColor(e.target.value)}
+      />
       <HorizontalSeparator />
       <select name="" id="" className={dropdownStyle}>
         <option value="">Titre 1</option>

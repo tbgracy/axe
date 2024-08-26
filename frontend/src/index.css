@@ -11,13 +11,45 @@
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
-        src: url("./assets/Inter-Regular.otf");
+        src: url("./assets/fonts/Inter-Regular.otf");
     }
 
     @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: bold;
-        src: url("./assets/Inter-Bold.otf");
+        src: url("./assets/fonts/Inter-Bold.otf");
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: url("./assets/fonts/Montserrat-Regular.ttf")
+    }
+
+    @font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: bold;
+        src: url("./assets/fonts/Montserrat-Bold.ttf")
+    }
+
+    @font-face {
+        font-family: 'Galada';
+        src: url('./assets/fonts/Galada-Regular.ttf');
+    }
+
+    @font-face {
+        font-family: 'Nunito';
+        font-style: normal;
+        src: url('./assets/fonts/Nunito-VariableFont_wght.ttf');
+    }
+
+
+    @font-face {
+        font-family: 'Nunito';
+        font-style: italic;
+        src: url('./assets/fonts/Nunito-Italic-VariableFont_wght.ttf');
     }
 }

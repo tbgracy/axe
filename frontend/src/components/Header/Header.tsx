@@ -52,7 +52,7 @@ export default function Header({
         <UserRow users={users} />
       </div>
       <div className="">
-        <Toolbar document={document} />
+        <Toolbar document={document}/>
       </div>
     </div>
   );

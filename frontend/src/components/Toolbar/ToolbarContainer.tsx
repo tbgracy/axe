@@ -1,10 +1,25 @@
-import { TextDocument } from "../../types";
+import { useContext } from "react";
+
+import EditorContext from "../../screens/Editor/context";
+
 import Toolbar from "./Toolbar";
+
 import { usePrint, useTextFormat } from "./hooks";
 
+import { TextDocument } from "../../types";
+
 export function ToolbarContainer({ document }: { document: TextDocument }) {
+  const editor = useContext(EditorContext);
+
   const { handlePrint } = usePrint();
-  const { formatBold, formatItalic, formatUnderline } = useTextFormat();
+  const {
+    handleFormatBold,
+    handleFormatItalic,
+    handleUnderline,
+    handleFontChange,
+    handleColorChange,
+  } = useTextFormat(editor!);
+  const currentColor = editor?.getAttributes("textStyle").color;
 
   return (
     <Toolbar
@@ -13,11 +28,13 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
       onShare={() => {}}
       onExport={() => {}}
       onPrint={handlePrint}
+      currentColor={currentColor}
       onMoreInfo={() => {}}
-      onChangeFont={() => {}}
-      onFormatBold={formatBold}
-      onFormatItalic={formatItalic}
-      onFormatUnderline={formatUnderline}
+      onChangeFont={handleFontChange}
+      onChangeColor={handleColorChange}
+      onFormatBold={handleFormatBold}
+      onFormatItalic={handleFormatItalic}
+      onFormatUnderline={handleUnderline}
     />
   );
 }
