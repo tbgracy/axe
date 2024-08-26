@@ -12,7 +12,7 @@ import EditorContext from "./context";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
 import CharacterCount from "@tiptap/extension-character-count";
-import FontSize from "tiptap-extension-font-size";
+import TextAlign from "@tiptap/extension-text-align"
 
 type EditorScreenProps = {
   document: TextDocument;
@@ -26,7 +26,9 @@ const extensions = [
   TextStyle,
   Color,
   CharacterCount,
-  FontSize,
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
+  }),
 ];
 
 export default function EditorScreen({ document, users }: EditorScreenProps) {
