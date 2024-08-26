@@ -24,6 +24,8 @@ function HorizontalSeparator() {
 
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
+export type TextAlignment = "left" | "right" | "center" | "justify";
+
 export type ToolbarProps = {
   document: TextDocument;
   currentColor: string;
@@ -34,10 +36,12 @@ export type ToolbarProps = {
   onMoreInfo: () => void;
   onChangeFont: (fontFamily: string) => void;
   onChangeColor: (newColor: string) => void;
+  onTextAlignChange: (alignment: TextAlignment) => void;
   onFormatBold: () => void;
   onFormatItalic: () => void;
   onFormatUnderline: () => void;
   onHeadingChange: (level: HeadingLevel) => void;
+  onBulletListToggle: () => void;
 };
 
 const fontFamilies = ["Inter", "Galada", "Nunito", "Montserrat"];
@@ -49,6 +53,8 @@ export default function Toolbar({
   onChangeFont,
   onHeadingChange,
   onChangeColor,
+  onTextAlignChange,
+  onBulletListToggle,
   currentColor,
   onDelete,
   onShare,
@@ -118,14 +124,34 @@ export default function Toolbar({
         <option value="3">Titre 3</option>
         <option value="4">Titre 4</option>
       </select>
-      <ToolbarButton icon={<FormatAlignCenter />} onClick={() => {}} />
-      <ToolbarButton icon={<FormatAlignJustify />} onClick={() => {}} />
-      <ToolbarButton icon={<FormatAlignLeft />} onClick={() => {}} />
-      <ToolbarButton icon={<FormatAlignRight />} onClick={() => {}} />
+      <ToolbarButton
+        icon={<FormatAlignJustify />}
+        onClick={() => {
+          onTextAlignChange("justify");
+        }}
+      />
+      <ToolbarButton
+        icon={<FormatAlignLeft />}
+        onClick={() => {
+          onTextAlignChange("left");
+        }}
+      />
+      <ToolbarButton
+        icon={<FormatAlignCenter />}
+        onClick={() => {
+          onTextAlignChange("center");
+        }}
+      />
+      <ToolbarButton
+        icon={<FormatAlignRight />}
+        onClick={() => {
+          onTextAlignChange("right");
+        }}
+      />
       <ToolbarButton
         tooltip={"List à puce"}
         icon={<FormatListBulleted />}
-        onClick={() => {}}
+        onClick={onBulletListToggle}
       />
       <HorizontalSeparator />
       <ToolbarButton

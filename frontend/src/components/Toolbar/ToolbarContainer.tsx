@@ -4,7 +4,7 @@ import EditorContext from "../../screens/Editor/context";
 
 import Toolbar from "./Toolbar";
 
-import { usePrint, useTextFormat } from "./hooks";
+import { useBulletList, usePrint, useTextAlign, useTextFormat } from "./hooks";
 
 import { TextDocument } from "../../types";
 
@@ -12,6 +12,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
   const editor = useContext(EditorContext);
 
   const { handlePrint } = usePrint();
+
   const {
     handleFormatBold,
     handleFormatItalic,
@@ -21,6 +22,10 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
     handleHeadingChange,
   } = useTextFormat(editor!);
   const currentColor = editor?.getAttributes("textStyle").color;
+
+  const handleTextAlign = useTextAlign(editor!);
+
+  const handleBulletListToggle = useBulletList(editor!);
 
   return (
     <Toolbar
@@ -33,10 +38,12 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
       onMoreInfo={() => {}}
       onChangeFont={handleFontChange}
       onChangeColor={handleColorChange}
+      onTextAlignChange={handleTextAlign}
       onHeadingChange={handleHeadingChange}
       onFormatBold={handleFormatBold}
       onFormatItalic={handleFormatItalic}
       onFormatUnderline={handleUnderline}
+      onBulletListToggle={handleBulletListToggle}
     />
   );
 }

@@ -1,5 +1,5 @@
 import { Editor } from "@tiptap/react";
-import { HeadingLevel } from "./Toolbar";
+import { HeadingLevel, TextAlignment } from "./Toolbar";
 
 export function usePrint() {
   function handlePrint() {}
@@ -40,5 +40,18 @@ export function useTextFormat(editor: Editor) {
     handleFontChange,
     handleColorChange,
     handleHeadingChange,
+  };
+}
+
+export function useBulletList(editor: Editor) {
+  return () => {
+    editor.chain().focus().toggleBulletList().run();
+  };
+}
+
+export function useTextAlign(editor: Editor) {
+  return (alignment: TextAlignment) => {
+    console.log(alignment);
+    editor.chain().focus().setTextAlign(alignment).run();
   };
 }

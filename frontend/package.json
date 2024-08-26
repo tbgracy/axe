@@ -20,6 +20,7 @@
     "@tiptap/extension-character-count": "^2.6.6",
     "@tiptap/extension-color": "^2.6.6",
     "@tiptap/extension-font-family": "^2.6.6",
+    "@tiptap/extension-text-align": "^2.6.6",
     "@tiptap/extension-text-style": "^2.6.6",
     "@tiptap/extension-underline": "^2.6.6",
     "@tiptap/pm": "^2.6.6",
@@ -27,8 +28,7 @@
     "@tiptap/starter-kit": "^2.6.6",
     "clsx": "^2.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tiptap-extension-font-size": "^1.2.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
