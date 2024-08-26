@@ -13,5 +13,11 @@ export default function SyncStateComponent({
     synced: <CloudDone />,
   }[syncState];
 
-  return <div>{icon}</div>;
+  const tooltip = {
+    syncing: "Synchronisation en cours ...",
+    "not-synced": "Non synchronisé sur le cloud.",
+    synced: "Synchronisé.",
+  }[syncState];
+
+  return <div title={tooltip}>{icon}</div>;
 }
