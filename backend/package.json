@@ -1,0 +1,14 @@
+{
+  "name": "axe-backend",
+  "version": "1.0.0",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^32.0.1"
+  }
+}
