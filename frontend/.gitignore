@@ -12,6 +12,7 @@ dist
 dist-ssr
 dist-electron
 *.local
+dev.db*
 
 # Editor directories and files
 .vscode/*
