@@ -1,14 +1,14 @@
-import { EditorContent, useEditor } from "@tiptap/react";
-import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
-import CharacterCount from "@tiptap/extension-character-count";
-import TextAlign from "@tiptap/extension-text-align";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
+import TextStyle from "@tiptap/extension-text-style";
+import TextAlign from "@tiptap/extension-text-align";
 import FontFamily from "@tiptap/extension-font-family";
+import { EditorContent, useEditor } from "@tiptap/react";
+import CharacterCount from "@tiptap/extension-character-count";
 
-import Header from "../../components/Header";
 import Sheet from "../../components/Sheet";
+import Header from "../../components/Header";
 import Statusbar from "../../components/Statusbar";
 
 import EditorContext from "./context";
