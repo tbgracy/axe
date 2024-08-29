@@ -24,21 +24,21 @@ model User {
   email             String
   creationDate      DateTime         @default(now())
   profilPicturePath String
-  document          TextDocument     @relation(fields: [textDocumentId], references: [id])
-  textDocumentId    String
   App               App[]
   DocumentAccess    DocumentAccess[]
+  TextDocument      TextDocument[]
 }
 
 model TextDocument {
   id             String           @id @default(uuid())
   title          String
   content        String
-  shared         Boolean
-  size           Size             @relation(fields: [sizeId], references: [id])
-  sizeId         String
-  User           User[]
+  shared         Boolean          @default(true)
+  width          Int
+  height         Int
+  owner          User             @relation(fields: [userId], references: [id])
   DocumentAccess DocumentAccess[]
+  userId         String
 }
 
 model DocumentAccess {
@@ -50,12 +50,4 @@ model DocumentAccess {
   textDocumentId String
   user           User         @relation(fields: [userId], references: [id])
   userId         String
-}
-
-model Size {
-  id           String         @id @default(uuid())
-  name         String
-  width        Int
-  height       Int
-  TextDocument TextDocument[]
 }
