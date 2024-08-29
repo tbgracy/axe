@@ -18,3 +18,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
         return ipcRenderer.invoke(channel, ...omit)
     },
 })
+
+contextBridge.exposeInMainWorld('api', {
+    fetchDocuments: () => ipcRenderer.invoke('fetchDocuments')
+})

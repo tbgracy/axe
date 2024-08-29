@@ -1,5 +1,7 @@
 /// <reference types="vite-plugin-electron/electron-env" />
 
+// import { TextDocument } from "../src/types";
+
 declare namespace NodeJS {
   interface ProcessEnv {
     /**
@@ -25,3 +27,11 @@ declare namespace NodeJS {
 interface Window {
   ipcRenderer: import("electron").IpcRenderer;
 }
+
+interface Window {
+  api: {
+    fetchDocuments: () => Promise<TextDocument[]>;
+  }
+}
+
+

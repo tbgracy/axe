@@ -9,6 +9,8 @@ export default function Splashscreen() {
     if (status === "initializing") {
       new Promise((r) => setTimeout(r, 2000)).then(() => setStatus("done"));
     }
+
+    return () => {};
   }, [status]);
 
   if (status === "initializing") {

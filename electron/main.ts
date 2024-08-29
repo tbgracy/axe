@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow, ipcMain } from "electron"
 
 import { fileURLToPath } from 'node:url'
 import path from "node:path"
@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 function createWindow() {
     const win = new BrowserWindow({
         icon: path.join("logo.png"),
+        autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, "preload.mjs")
         }
@@ -32,4 +33,9 @@ app.on('activate', () => {
     }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+    ipcMain.handle('fetchDocuments', () => {
+        return []
+    })
+    createWindow()
+})
