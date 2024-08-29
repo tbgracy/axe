@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 function createWindow() {
     const win = new BrowserWindow({
+        icon: path.join("logo.png"),
         webPreferences: {
             preload: path.join(__dirname, "preload.mjs")
         }
