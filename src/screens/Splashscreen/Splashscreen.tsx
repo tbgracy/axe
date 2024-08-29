@@ -22,6 +22,6 @@ export default function Splashscreen() {
   }
 
   if (status === "done") {
-    return <Navigate to="/app" />;
+    return <Navigate to="/app/documents" />;
   }
 }
