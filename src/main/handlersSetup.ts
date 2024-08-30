@@ -14,4 +14,14 @@ export default function setupIpcHandlers() {
     const result = await repo.getDocuments();
     return result;
   });
+
+  ipcMain.handle("delete-document", async (_, id: string) => {
+    const result = await repo.deleteDocument(id);
+    return result;
+  });
+
+  ipcMain.handle("toggle-share-state", async (_, document: TextDocument) => {
+    const result = await repo.toggleShareOf(document);
+    return result;
+  });
 }

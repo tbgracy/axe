@@ -41,7 +41,9 @@ export default function DocumentManager() {
     return () => {};
   }, [state]);
 
-  function handleSearch(keyword: string) {}
+  function handleSearch(keyword?: string) {
+    console.log(keyword);
+  }
 
   function handleInvitation() {}
 
@@ -56,15 +58,33 @@ export default function DocumentManager() {
   }
 
   function handleDelete(documentId: string) {}
-  function handleShare(documentId: string) {}
+
+  function handleShare(documentId: string) {
+    console.log('toggling doc ');
+    
+    window.electron.ipcRenderer
+      .invoke(
+        "toggle-share-state",
+        documents.find((d) => d.id === documentId) as TextDocument
+      )
+      .then((result: Result<TextDocument>) => {
+        setDocuments(
+          documents.map((d) => {
+            if (d.id === documentId) {
+              return {
+                ...d,
+                shared: result.data?.shared ?? d.shared,
+              };
+            }
+            return d;
+          })
+        );
+      });
+  }
   function handleOpen(documentId: string) {}
 
   function handleNewDoc(newDoc: TextDocument) {
     setDocuments((prevState) => [...prevState, newDoc]);
-  }
-
-  if (state.status === "error") {
-    alert("Une erreur est survenu.");
   }
 
   return (
@@ -76,10 +96,14 @@ export default function DocumentManager() {
       />
       <div className="h-[100vh] overflow-y-scroll">
         <div className="flex gap-2 items-center ml-auto mr-auto mb-4 w-[90%]">
-          <Searchbar disabled={disableControls} onTyping={handleSearch} />
+          <Searchbar disabled={disableControls} onChange={handleSearch} />
           <InviteButton onClick={handleInvitation} />
         </div>
-        <Content status={state.status} documents={documents} />
+        <Content
+          status={state.status}
+          documents={documents}
+          onShare={handleShare}
+        />
       </div>
       <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
         <Button

@@ -35,7 +35,7 @@ export default function Menu({
             className={menuItemClass}
             onClick={() => {
               setOpen(false);
-              onShare;
+              onShare();
             }}
           >
             <Share />

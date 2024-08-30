@@ -8,11 +8,18 @@ export default class DocumentService {
   }
 
   async getDocuments(): Promise<Result<TextDocument[]>> {
-    const documents = await this.prisma.textDocument.findMany();
-    return {
-      success: true,
-      data: documents,
-    };
+    try {
+      const documents = await this.prisma.textDocument.findMany();
+      return {
+        success: true,
+        data: documents,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
   }
 
   async createNewDocument(
@@ -20,17 +27,64 @@ export default class DocumentService {
     height: number,
     width: number
   ): Promise<Result<TextDocument>> {
-    const document = await this.prisma.textDocument.create({
-      data: {
-        title,
-        content: "",
-        height,
-        width,
-      },
-    });
-    return {
-      success: true,
-      data: document,
-    };
+    try {
+      const document = await this.prisma.textDocument.create({
+        data: {
+          title,
+          content: "",
+          height,
+          width,
+        },
+      });
+      return {
+        success: true,
+        data: document,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
+  }
+
+  async deleteDocument(id: string): Promise<Result<void>> {
+    try {
+      await this.prisma.textDocument.delete({
+        where: {
+          id,
+        },
+      });
+      return {
+        success: true,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
+  }
+
+  async toggleShareOf(document: TextDocument): Promise<Result<TextDocument>> {
+    try {
+      const updatedDocument = await this.prisma.textDocument.update({
+        where: {
+          id: document.id,
+        },
+        data: {
+          shared: !document.shared,
+        },
+      });
+      return {
+        success: true,
+        data: updatedDocument,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
   }
 }

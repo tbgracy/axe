@@ -6,9 +6,11 @@ import { Status } from "./DocumentManager";
 export function Content({
   documents,
   status,
+  onShare,
 }: {
   documents: TextDocument[];
   status: Status;
+  onShare: (id: string) => void;
 }) {
   if (status === "fetching") {
     return (
@@ -40,7 +42,7 @@ export function Content({
                 key={d.id}
                 document={d}
                 onOpen={() => {}}
-                onShare={() => {}}
+                onShare={() => onShare(d.id)}
                 onDelete={() => {}}
               />
             ))}
