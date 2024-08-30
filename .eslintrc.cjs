@@ -1,15 +1,21 @@
 module.exports = {
-  root: true,
+  root: truee,
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "@electron-toolkit/eslint-config-ts/recommended",
+    "@electron-toolkit/eslint-config-prettier",
     "plugin:storybook/recommended",
-    "plugin:storybook/recommended",
-    "prettier"
+    "prettier",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: [
+    "node_modules",
+    "dist",
+    "out",
+    ".eslintrc.cjs",
+    ".gitignore",
+  ],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
@@ -18,4 +24,4 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-}
+};

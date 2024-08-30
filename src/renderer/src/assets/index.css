@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+ul {
+  list-style: disc;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./fonts/Inter-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./fonts/Inter-Bold.otf");
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./assets/fonts/Montserrat-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/Montserrat-Bold.ttf");
+  }
+
+  @font-face {
+    font-family: "Galada";
+    src: url("./assets/fonts/Galada-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Nunito";
+    font-style: normal;
+    src: url("./assets/fonts/Nunito-VariableFont_wght.ttf");
+  }
+
+  @font-face {
+    font-family: "Nunito";
+    font-style: italic;
+    src: url("./assets/fonts/Nunito-Italic-VariableFont_wght.ttf");
+  }
+}
