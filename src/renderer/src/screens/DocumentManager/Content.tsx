@@ -32,7 +32,7 @@ export function Content({
       );
     } else {
       return (
-        <div className="flex flex-wrap gap-4 w-[90%] ml-auto mr-auto mb-24">
+        <div className="flex flex-wrap justify-center md:justify-normal lg:justify-normal gap-4 w-[90%] ml-auto mr-auto mb-24">
           {documents !== undefined &&
             documents.map((d) => (
               <DocumentCard
