@@ -86,7 +86,7 @@ export default function Navbar({
       </div>
       <ul className="space-y-2">
         {linksData.map((link) => (
-          <li>
+          <li key={link.label}>
             <Navlink
               expanded={expanded}
               icon={link.icon}

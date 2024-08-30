@@ -4,7 +4,8 @@ import noDocPlaceholder from "./add_files.svg";
 import { Status } from "./DocumentManager";
 
 export function Content({
-  documents, status,
+  documents,
+  status,
 }: {
   documents: TextDocument[];
   status: Status;
@@ -36,10 +37,12 @@ export function Content({
           {documents !== undefined &&
             documents.map((d) => (
               <DocumentCard
+                key={d.id}
                 document={d}
-                onOpen={() => { }}
-                onShare={() => { }}
-                onDelete={() => { }} />
+                onOpen={() => {}}
+                onShare={() => {}}
+                onDelete={() => {}}
+              />
             ))}
         </div>
       );
