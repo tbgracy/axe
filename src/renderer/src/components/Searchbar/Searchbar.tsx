@@ -1,18 +1,28 @@
-import { Search } from "@mui/icons-material";
+import { Search, Close } from "@mui/icons-material";
 import clsx from "clsx";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Searchbar({
-  onTyping,
+  onChange,
   disabled = false,
 }: {
-  onTyping: (text: string) => void;
+  onChange: (fiter?: string) => void;
   disabled?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState("");
 
   function handleClick() {
     inputRef.current?.focus();
+  }
+
+  function handleChange(e) {
+    setValue(e.target.value);
+    onChange(value);
+  }
+
+  function handleClear() {
+    setValue("");
   }
 
   return (
@@ -27,11 +37,17 @@ export default function Searchbar({
       <input
         ref={inputRef}
         disabled={disabled}
-        onChange={(e) => onTyping(e.target.value)}
+        value={value}
+        onChange={handleChange}
         type="text"
         placeholder="Rechercher ..."
         className="w-full outline-none bg-[transparent]"
       />
+      {Boolean(value) && (
+        <div onClick={handleClear} className="cursor-pointer">
+          <Close htmlColor="#cdcdcd" />
+        </div>
+      )}
     </div>
   );
 }
