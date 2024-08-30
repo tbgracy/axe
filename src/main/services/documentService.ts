@@ -7,16 +7,19 @@ export default class DocumentService {
     this.prisma = prisma;
   }
 
-  async getDocuments(): Promise<TextDocument[]> {
+  async getDocuments(): Promise<Result<TextDocument[]>> {
     const documents = await this.prisma.textDocument.findMany();
-    return documents;
+    return {
+      success: true,
+      data: documents,
+    };
   }
 
   async createNewDocument(
     title: string,
     height: number,
-    width: number,
-  ): Promise<TextDocument> {
+    width: number
+  ): Promise<Result<TextDocument>> {
     const document = await this.prisma.textDocument.create({
       data: {
         title,
@@ -25,6 +28,9 @@ export default class DocumentService {
         width,
       },
     });
-    return document;
+    return {
+      success: true,
+      data: document,
+    };
   }
 }

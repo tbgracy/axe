@@ -1,6 +1,6 @@
-export async function fetchDocuments(): Promise<TextDocument[]> {
-  const documents = await window.api.fetchDocuments();
+export async function fetchDocuments(): Promise<Result<TextDocument[]>> {
+  const documents: Result<TextDocument[]> =
+    await window.electron.ipcRenderer.invoke("fetch-documents");
   await new Promise((resolve) => setTimeout(resolve, 2000));
-  console.log(documents);
   return documents;
 }

@@ -1,10 +1,9 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
+import { api } from "./index";
 
 declare global {
   interface Window {
     electron: ElectronAPI;
-    api: {
-      fetchDocuments: () => Promise<TextDocument[]>;
-    };
+    api: typeof api;
   }
 }

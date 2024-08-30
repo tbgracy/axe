@@ -1,67 +1,19 @@
 import { useEffect, useState } from "react";
+
+import { Content } from "./Content";
 import Button from "../../components/Button";
-import DocumentCard from "../../components/DocumentCard";
-import InviteButton from "../../components/InviteButton";
 import Searchbar from "../../components/Searchbar";
+import InviteButton from "../../components/InviteButton";
+
 import { fetchDocuments } from "./data";
-import LoadingAnimation from "../../components/LoadingAnimation";
 
-import noDocPlaceholder from "./add_files.svg";
-
-type Status = "fetching" | "idle" | "error";
+export type Status = "fetching" | "idle" | "error";
 
 type DocumentManagerState = {
   status: Status;
   documents: TextDocument[];
   message?: string;
 };
-
-function Content({
-  documents,
-  status,
-}: {
-  documents: TextDocument[];
-  status: Status;
-}) {
-  if (status === "fetching") {
-    return (
-      <div className="absolute inset-0 top-[35%]">
-        <LoadingAnimation />
-      </div>
-    );
-  }
-
-  if (status === "idle") {
-    const isEmpty = documents.length === 0;
-
-    if (isEmpty) {
-      return (
-        <div className="h-[70vh] flex flex-col items-center justify-center select-none">
-          <img src={noDocPlaceholder} alt="" className="h-[15rem]" />
-          <p className="w-[20rem] text-center">
-            Aucun document, veuillez cliquer sur l'un des bouttons ci-dessous
-            pour en ajouter 😁.
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="flex flex-wrap gap-4 justify-center w-[90%] ml-auto mr-auto mb-24">
-          {documents !== undefined &&
-            documents.map((d) => (
-              <DocumentCard
-                document={d}
-                onOpen={() => {}}
-                onShare={() => {}}
-                onDelete={() => {}}
-              />
-            ))}
-        </div>
-      );
-    }
-  }
-  return;
-}
 
 export default function DocumentManager() {
   const [state, setState] = useState<DocumentManagerState>({
@@ -73,11 +25,12 @@ export default function DocumentManager() {
 
   useEffect(() => {
     if (state.status === "fetching") {
-      fetchDocuments().then((documents) => {
+      fetchDocuments().then((result) => {
         setState({
           ...state,
-          status: "idle",
-          documents,
+          status: result.success ? "idle" : "error",
+          documents: result.data ?? [],
+          message: result.message,
         });
       });
     }

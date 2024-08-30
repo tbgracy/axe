@@ -1,9 +1,8 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { app, shell, BrowserWindow } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-
-import { repo } from "./services";
+import setupIpcHandlers from "./handlersSetup";
 
 function createWindow(): void {
   // Create the browser window.
@@ -11,7 +10,7 @@ function createWindow(): void {
     width: 900,
     height: 670,
     show: false,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       contextIsolation: true,
@@ -52,16 +51,9 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  // IPC test
-  ipcMain.on("ping", async () => {
-    const newDoc = await repo.createNewDocument("First", 200, 200);
-    console.log(newDoc);
-    const docs = await repo.getDocuments();
-    console.log(docs);
-    return docs;
-  });
-
   createWindow();
+
+  setupIpcHandlers();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the

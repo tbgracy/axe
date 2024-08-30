@@ -21,6 +21,12 @@ declare global {
     email: string;
     profilePicturePath?: string;
   };
+
+  export type Result<T> = {
+    success: boolean;
+    data?: T;
+    message?: string;
+  };
 }
 
 export {};
