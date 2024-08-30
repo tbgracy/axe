@@ -21,7 +21,7 @@ export default function Menu({
         <MoreVert />
       </div>
       {open && (
-        <ul className="absolute bg-white w-44 drop-shadow-md rounded-[10px] p-4 space-y-4 right-2 top-6">
+        <ul className="absolute bg-white w-44 drop-shadow-md rounded-[10px] p-4 space-y-4 right-2 top-6 z-10">
           <li
             className={menuItemClass}
             onClick={() => {
