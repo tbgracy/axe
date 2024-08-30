@@ -21,7 +21,7 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       className={clsx({
-        "h-16 rounded-xl flex py-3 px-6 gap-3 items-center": true,
+        "h-16 rounded-xl flex py-3 px-6 gap-3 items-center w-fit": true,
         "bg-[#2c2c2c] hover:bg-[#000000]": !primary && !disabled,
         "bg-[#0D6EB5] hover:bg-[#0a5890]": primary && !disabled,
         "cursor-not-allowed bg-gray-300": disabled,
