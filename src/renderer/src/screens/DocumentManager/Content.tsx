@@ -7,10 +7,12 @@ export function Content({
   documents,
   status,
   onShare,
+  onDelete,
 }: {
   documents: TextDocument[];
   status: Status;
   onShare: (id: string) => void;
+  onDelete: (id: string) => void;
 }) {
   if (status === "fetching") {
     return (
@@ -43,7 +45,7 @@ export function Content({
                 document={d}
                 onOpen={() => {}}
                 onShare={() => onShare(d.id)}
-                onDelete={() => {}}
+                onDelete={() => onDelete(d.id)}
               />
             ))}
         </div>

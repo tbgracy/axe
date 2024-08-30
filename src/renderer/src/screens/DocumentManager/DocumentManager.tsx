@@ -57,11 +57,17 @@ export default function DocumentManager() {
     toggleDialog();
   }
 
-  function handleDelete(documentId: string) {}
+  function handleDelete(documentId: string) {
+    window.electron.ipcRenderer
+      .invoke("delete-document", documentId)
+      .then((result: Result<void>) => {
+        if (result.success) {
+          setDocuments(documents.filter((d) => d.id !== documentId));
+        }
+      });
+  }
 
   function handleShare(documentId: string) {
-    console.log('toggling doc ');
-    
     window.electron.ipcRenderer
       .invoke(
         "toggle-share-state",
@@ -81,6 +87,7 @@ export default function DocumentManager() {
         );
       });
   }
+
   function handleOpen(documentId: string) {}
 
   function handleNewDoc(newDoc: TextDocument) {
@@ -103,6 +110,7 @@ export default function DocumentManager() {
           status={state.status}
           documents={documents}
           onShare={handleShare}
+          onDelete={handleDelete}
         />
       </div>
       <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
