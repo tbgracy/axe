@@ -6,30 +6,33 @@ import Searchbar from "../../components/Searchbar";
 import InviteButton from "../../components/InviteButton";
 
 import { fetchDocuments } from "./data";
+import NewDocumentModal from "./NewDocumentModal";
 
 export type Status = "fetching" | "idle" | "error";
 
 type DocumentManagerState = {
   status: Status;
-  documents: TextDocument[];
   message?: string;
+  isDialogOpen: boolean;
 };
 
 export default function DocumentManager() {
   const [state, setState] = useState<DocumentManagerState>({
     status: "fetching",
-    documents: [],
+    isDialogOpen: false,
   });
+  const [documents, setDocuments] = useState<TextDocument[]>([]);
 
   const disableControls = state.status !== "idle";
 
   useEffect(() => {
     if (state.status === "fetching") {
       fetchDocuments().then((result) => {
+        setDocuments(result.data ?? []);
+        setDocuments(result.data ?? []);
         setState({
           ...state,
           status: result.success ? "idle" : "error",
-          documents: result.data ?? [],
           message: result.message,
         });
       });
@@ -44,11 +47,21 @@ export default function DocumentManager() {
 
   function handleImport() {}
 
-  function handleCreate() {}
+  function toggleDialog() {
+    setState({ ...state, isDialogOpen: !state.isDialogOpen });
+  }
+
+  async function handleCreate() {
+    toggleDialog();
+  }
 
   function handleDelete(documentId: string) {}
   function handleShare(documentId: string) {}
   function handleOpen(documentId: string) {}
+
+  function handleNewDoc(newDoc: TextDocument) {
+    setDocuments((prevState) => [...prevState, newDoc]);
+  }
 
   if (state.status === "error") {
     alert("Une erreur est survenu.");
@@ -56,12 +69,17 @@ export default function DocumentManager() {
 
   return (
     <div className="h-[100vh] flex-grow relative bg-white">
+      <NewDocumentModal
+        isOpen={state.isDialogOpen}
+        onClose={toggleDialog}
+        updateDocuments={handleNewDoc}
+      />
       <div className="h-[100vh] overflow-y-scroll">
         <div className="flex gap-2 items-center ml-auto mr-auto mb-4 w-[90%]">
           <Searchbar disabled={disableControls} onTyping={handleSearch} />
           <InviteButton onClick={handleInvitation} />
         </div>
-        <Content status={state.status} documents={state.documents} />
+        <Content status={state.status} documents={documents} />
       </div>
       <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
         <Button
