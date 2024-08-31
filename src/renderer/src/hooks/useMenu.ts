@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useMenuOpen(menuRef: React.RefObject<HTMLDivElement>) {
+export default function useMenu(menuRef: React.RefObject<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

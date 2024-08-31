@@ -1,4 +1,4 @@
-import Menu from "./Menu";
+import Menu from "./MenuComponent";
 
 export type DocumentCardProps = {
   document: TextDocument;

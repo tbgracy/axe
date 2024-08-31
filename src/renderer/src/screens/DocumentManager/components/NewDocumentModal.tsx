@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
 import Button from "@renderer/components/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createNew, selectStatus } from "./documentsSlice";
+import { createNew, selectStatus } from "../documentsSlice";
 
 type NewDocumentModalProps = {
   isOpen: boolean;

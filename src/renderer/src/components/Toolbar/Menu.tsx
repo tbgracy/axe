@@ -1,6 +1,6 @@
 import { MoreVert, Print, Info, IosShare, Delete } from "@mui/icons-material";
 import { useRef } from "react";
-import { useMenuOpen } from "../DocumentCard/hooks";
+import useMenu from "@renderer/hooks/useMenu";
 import { ToolbarProps } from "./Toolbar";
 
 export default function Menu({
@@ -11,7 +11,7 @@ export default function Menu({
 }: Pick<ToolbarProps, "onExport" | "onPrint" | "onMoreInfo" | "onDelete">) {
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const { handleClick, open, setOpen } = useMenuOpen(menuRef);
+  const { handleClick, open, setOpen } = useMenu(menuRef);
 
   const menuItemClass =
     "flex gap-2 items-center hover:bg-gray-200 p-2 rounded-[10px]";

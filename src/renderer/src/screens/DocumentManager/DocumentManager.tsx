@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
 
-import Content from "./Content";
-import Button from "../../components/Button";
-import Searchbar from "../../components/Searchbar";
-import InviteButton from "../../components/InviteButton";
+import Button from "@renderer/components/Button";
 
-import NewDocumentModal from "./NewDocumentModal";
+import Content from "./components/Content";
+import Searchbar from "./components/Searchbar";
+import InviteButton from "./components/InviteButton";
+import NewDocumentModal from "./components/NewDocumentModal";
+
 import { filter, fetchAll, selectStatus } from "./documentsSlice";
 
 export default function DocumentManager() {

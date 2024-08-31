@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
 
-import DocumentCard from "../../components/DocumentCard";
-import LoadingAnimation from "../../components/LoadingAnimation";
+import LoadingAnimation from "@renderer/components/LoadingAnimation";
 
-import noDocPlaceholder from "./add_files.svg";
-import noFilterResultPlaceholder from "./empty_filter.svg";
+import DocumentCard from "./DocumentCard";
+
+import noDocPlaceholder from "@renderer/assets/illustrations/add_files.svg";
+import noFilterResultPlaceholder from "@renderer/assets/illustrations/empty_filter.svg";
 
 import {
   deleteOne,
-  selectDocuments,
-  selectStatus,
   toggleShare,
-} from "./documentsSlice";
+  selectStatus,
+  selectDocuments,
+} from "../documentsSlice";
 
 export default function Content() {
   const status = useAppSelector(selectStatus);

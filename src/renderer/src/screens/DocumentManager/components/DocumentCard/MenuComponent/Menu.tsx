@@ -1,7 +1,9 @@
-import { MoreVert, Launch, Share, Delete } from "@mui/icons-material";
 import { useRef } from "react";
-import { DocumentCardProps } from "./DocumentCard";
-import { useMenuOpen } from "./hooks";
+import { MoreVert, Launch, Share, Delete } from "@mui/icons-material";
+
+import { DocumentCardProps } from "../DocumentCard";
+
+import useMenu from "@renderer/hooks/useMenu";
 
 export default function Menu({
   document,
@@ -11,7 +13,7 @@ export default function Menu({
 }: DocumentCardProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const { handleClick, open, setOpen } = useMenuOpen(menuRef);
+  const { handleClick, open, setOpen } = useMenu(menuRef);
 
   const menuItemClass = "flex gap-2 hover:bg-gray-200 p-2 rounded-[10px]";
 

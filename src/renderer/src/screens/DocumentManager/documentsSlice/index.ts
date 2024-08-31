@@ -1,5 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@renderer/app/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { createNew, deleteOne, fetchAll, toggleShare } from "./thunks";
+import { selectStatus, selectDocuments } from "./selectors";
 
 export type DocumentsState = {
   status: "fetching" | "error" | "idle" | "inviting" | "creating";
@@ -13,48 +15,6 @@ const initialState: DocumentsState = {
   documents: [],
   filter: "",
 };
-
-export const createNew = createAsyncThunk<Result<TextDocument>, string>(
-  "documents/createNew",
-  async (newDocumentTitle) => {
-    const result: Result<TextDocument> =
-      await window.electron.ipcRenderer.invoke(
-        "create-document",
-        newDocumentTitle
-      );
-    return result;
-  }
-);
-
-export const fetchAll = createAsyncThunk<Result<TextDocument[]>>(
-  "documents/fetchAll",
-  async () => {
-    const result: Result<TextDocument[]> =
-      await window.electron.ipcRenderer.invoke("fetch-documents");
-    return result;
-  }
-);
-
-export const deleteOne = createAsyncThunk<Result<TextDocument>, string>(
-  "documents/delete",
-  async (documentId) => {
-    const result: Result<TextDocument> =
-      await window.electron.ipcRenderer.invoke("delete-document", documentId);
-    return result;
-  }
-);
-
-export const toggleShare = createAsyncThunk<Result<TextDocument>, TextDocument>(
-  "documents/share",
-  async (documentToToggleShare) => {
-    const result: Result<TextDocument> =
-      await window.electron.ipcRenderer.invoke(
-        "toggle-share-state",
-        documentToToggleShare
-      );
-    return result;
-  }
-);
 
 const documentSlice = createSlice({
   name: "documents",
@@ -117,20 +77,8 @@ const documentSlice = createSlice({
   },
 });
 
-export const selectDocuments = (state: RootState) => {
-  const filter = state.documents.filter;
-  if (Boolean(filter)) {
-    return state.documents.documents.filter((d) =>
-      d.title.toLocaleLowerCase().includes(filter.toLowerCase())
-    );
-  }
-  return state.documents.documents;
-};
-
-export const selectStatus = (state: RootState) => {
-  return state.documents.status;
-};
-
+export { createNew, fetchAll, deleteOne, toggleShare };
 export const { invite, filter } = documentSlice.actions;
+export { selectDocuments, selectStatus };
 
 export default documentSlice.reducer;

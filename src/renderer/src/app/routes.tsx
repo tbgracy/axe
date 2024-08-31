@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import DocumentManager from "../screens/DocumentManager/DocumentManager";
-import Editor from "../screens/Editor";
 import Layout from "./Layout";
+import Editor from "../screens/Editor";
 import Splashscreen from "../screens/Splashscreen";
+import DocumentManager from "../screens/DocumentManager";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
   {

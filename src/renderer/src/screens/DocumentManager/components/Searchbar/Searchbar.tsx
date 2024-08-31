@@ -1,6 +1,6 @@
-import { Search, Close } from "@mui/icons-material";
 import clsx from "clsx";
 import { useRef, useState } from "react";
+import { Search, Close } from "@mui/icons-material";
 
 export default function Searchbar({
   onChange,
