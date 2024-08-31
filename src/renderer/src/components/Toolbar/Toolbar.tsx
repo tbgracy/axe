@@ -29,7 +29,6 @@ export type ToolbarProps = {
   document: TextDocument;
   currentColor: string;
   onDelete: () => void;
-  onShare: () => void;
   onExport: () => void;
   onPrint: () => void;
   onMoreInfo: () => void;
@@ -56,7 +55,6 @@ export default function Toolbar({
   onBulletListToggle,
   currentColor,
   onDelete,
-  onShare,
   onExport,
   onPrint,
   onMoreInfo,
@@ -196,7 +194,6 @@ export default function Toolbar({
       <HorizontalSeparator />
       <Menu
         onDelete={onDelete}
-        onShare={onShare}
         onExport={onExport}
         onMoreInfo={onMoreInfo}
         onPrint={onPrint}

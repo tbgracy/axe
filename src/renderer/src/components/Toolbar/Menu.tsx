@@ -1,25 +1,14 @@
-import {
-  MoreVert,
-  Share,
-  Print,
-  Info,
-  IosShare,
-  Delete,
-} from "@mui/icons-material";
+import { MoreVert, Print, Info, IosShare, Delete } from "@mui/icons-material";
 import { useRef } from "react";
 import { useMenuOpen } from "../DocumentCard/hooks";
 import { ToolbarProps } from "./Toolbar";
 
 export default function Menu({
-  onShare,
   onExport,
   onPrint,
   onMoreInfo,
   onDelete,
-}: Pick<
-  ToolbarProps,
-  "onShare" | "onExport" | "onPrint" | "onMoreInfo" | "onDelete"
->) {
+}: Pick<ToolbarProps, "onExport" | "onPrint" | "onMoreInfo" | "onDelete">) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const { handleClick, open, setOpen } = useMenuOpen(menuRef);
@@ -37,15 +26,6 @@ export default function Menu({
       </div>
       {open && (
         <ul className="absolute bg-white w-fit drop-shadow-md rounded-[10px] p-4 right-2 top-6">
-          <li
-            className={menuItemClass}
-            onClick={() => {
-              setOpen(false);
-              onShare();
-            }}
-          >
-            <Share /> Partager
-          </li>
           <li
             className={menuItemClass}
             onClick={() => {

@@ -11,6 +11,7 @@ import {
 
 import Button from "@renderer/components/Button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type NewDocumentModalProps = {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export default function NewDocumentModal({
 }: NewDocumentModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
   function handleChange(e) {
     e.preventDefault();
@@ -41,6 +43,7 @@ export default function NewDocumentModal({
         setIsLoading(false);
         if (result.success) {
           updateDocuments(result.data!);
+          navigate(`/app/documents/${result.data?.id}`);
           onClose();
         }
       });

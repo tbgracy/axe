@@ -49,8 +49,6 @@ export default function DocumentManager() {
 
   function handleInvitation() {}
 
-  function handleImport() {}
-
   function toggleDialog() {
     setState({ ...state, isDialogOpen: !state.isDialogOpen });
   }
@@ -119,13 +117,6 @@ export default function DocumentManager() {
         />
       </div>
       <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
-        <Button
-          disabled={disableControls}
-          onClick={handleImport}
-          primary={false}
-        >
-          Importer un document (docx/odt)
-        </Button>
         <Button disabled={disableControls} onClick={handleCreate}>
           Créer un nouveau document
         </Button>
