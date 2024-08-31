@@ -106,4 +106,26 @@ export default class DocumentService {
       };
     }
   }
+
+  async saveDocument(document: TextDocument): Promise<Result<TextDocument>> {
+    try {
+      const updatedDocument = await this.prisma.textDocument.update({
+        where: {
+          id: document.id,
+        },
+        data: {
+          ...document,
+        },
+      });
+      return {
+        success: true,
+        data: updatedDocument,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
+  }
 }

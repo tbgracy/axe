@@ -4,11 +4,13 @@ import { Redo, Undo } from "@mui/icons-material";
 import DocumentTitle from "../DocumentTitle";
 import Toolbar from "../Toolbar";
 import UserRow from "../UserRow";
-import SyncStateComponent, { SyncState } from "./SynStateComponent";
+import SyncStateComponent, { SyncState } from "./components/SynStateComponent";
+import SaveButton from "./components/SaveButton";
 
 export type HeaderProps = {
   users: User[];
   document: TextDocument;
+  onSave?: () => void;
   onUndo?: () => void;
   onRedo?: () => void;
   syncState: SyncState;
@@ -17,6 +19,7 @@ export type HeaderProps = {
 export default function Header({
   users,
   document,
+  onSave,
   onRedo,
   onUndo,
   syncState,
@@ -45,6 +48,7 @@ export default function Header({
             <Redo />
           </div>
         </div>
+        <SaveButton onSave={onSave} />
         <div className="mr-auto">
           <SyncStateComponent syncState={syncState} />
         </div>
