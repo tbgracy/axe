@@ -87,4 +87,23 @@ export default class DocumentService {
       };
     }
   }
+
+  async openDocument(id: string): Promise<Result<TextDocument>> {
+    try {
+      const doc = await this.prisma.textDocument.findFirst({
+        where: {
+          id,
+        },
+      });
+      return {
+        success: true,
+        data: doc as TextDocument,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
+  }
 }

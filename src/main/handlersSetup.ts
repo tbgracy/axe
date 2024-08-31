@@ -24,4 +24,9 @@ export default function setupIpcHandlers() {
     const result = await repo.toggleShareOf(document);
     return result;
   });
+
+  ipcMain.handle("open-document", async (_, id: string) => {
+    const result = await repo.openDocument(id);
+    return result;
+  });
 }

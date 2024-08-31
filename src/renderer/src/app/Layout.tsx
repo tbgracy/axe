@@ -6,7 +6,7 @@ export default function Layout() {
   const navigate = useNavigate();
 
   function handleGoBack() {
-    navigate("/");
+    navigate(-1);
   }
 
   function handleGoToHelp() {

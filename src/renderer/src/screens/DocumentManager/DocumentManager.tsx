@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { Content } from "./Content";
+import Content from "./Content";
 import Button from "../../components/Button";
 import Searchbar from "../../components/Searchbar";
 import InviteButton from "../../components/InviteButton";
 
 import { fetchDocuments } from "./data";
 import NewDocumentModal from "./NewDocumentModal";
+import { useNavigate } from "react-router-dom";
 
 export type Status = "fetching" | "idle" | "error";
 
@@ -17,6 +18,8 @@ type DocumentManagerState = {
 };
 
 export default function DocumentManager() {
+  const navigate = useNavigate();
+
   const [state, setState] = useState<DocumentManagerState>({
     status: "fetching",
     isDialogOpen: false,
@@ -28,7 +31,6 @@ export default function DocumentManager() {
   useEffect(() => {
     if (state.status === "fetching") {
       fetchDocuments().then((result) => {
-        setDocuments(result.data ?? []);
         setDocuments(result.data ?? []);
         setState({
           ...state,
@@ -88,7 +90,9 @@ export default function DocumentManager() {
       });
   }
 
-  function handleOpen(documentId: string) {}
+  function handleOpen(documentId: string) {
+    navigate(`/app/documents/${documentId}`);
+  }
 
   function handleNewDoc(newDoc: TextDocument) {
     setDocuments((prevState) => [...prevState, newDoc]);
@@ -109,6 +113,7 @@ export default function DocumentManager() {
         <Content
           status={state.status}
           documents={documents}
+          onOpen={handleOpen}
           onShare={handleShare}
           onDelete={handleDelete}
         />

@@ -3,14 +3,16 @@ import LoadingAnimation from "../../components/LoadingAnimation";
 import noDocPlaceholder from "./add_files.svg";
 import { Status } from "./DocumentManager";
 
-export function Content({
+export default function Content({
   documents,
   status,
+  onOpen,
   onShare,
   onDelete,
 }: {
   documents: TextDocument[];
   status: Status;
+  onOpen: (id: string) => void;
   onShare: (id: string) => void;
   onDelete: (id: string) => void;
 }) {
@@ -43,7 +45,7 @@ export function Content({
               <DocumentCard
                 key={d.id}
                 document={d}
-                onOpen={() => {}}
+                onOpen={() => onOpen(d.id)}
                 onShare={() => onShare(d.id)}
                 onDelete={() => onDelete(d.id)}
               />
