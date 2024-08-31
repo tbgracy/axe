@@ -4,8 +4,8 @@ import { service } from "./services";
 export default function setupIpcHandlers() {
   ipcMain.handle(
     "create-document",
-    async (_, title: string, height: number, width: number) => {
-      const result = await service.createNewDocument(title, height, width);
+    async (_, title: string) => {
+      const result = await service.createNewDocument(title);
       return result;
     }
   );

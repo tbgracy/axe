@@ -1,123 +1,48 @@
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
 
 import Content from "./Content";
 import Button from "../../components/Button";
 import Searchbar from "../../components/Searchbar";
 import InviteButton from "../../components/InviteButton";
 
-import { fetchDocuments } from "./data";
 import NewDocumentModal from "./NewDocumentModal";
-import { useNavigate } from "react-router-dom";
-
-export type Status = "fetching" | "idle" | "error";
-
-type DocumentManagerState = {
-  status: Status;
-  message?: string;
-  isDialogOpen: boolean;
-};
+import { filter, fetchAll, selectStatus } from "./documentsSlice";
 
 export default function DocumentManager() {
-  const navigate = useNavigate();
-
-  const [state, setState] = useState<DocumentManagerState>({
-    status: "fetching",
-    isDialogOpen: false,
-  });
-  const [documents, setDocuments] = useState<TextDocument[]>([]);
-
-  const disableControls = state.status !== "idle";
+  const [isDialogOpen, setIsDialogIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const status = useAppSelector(selectStatus);
+  const disableControls = status !== "idle";
 
   useEffect(() => {
-    if (state.status === "fetching") {
-      fetchDocuments().then((result) => {
-        setDocuments(result.data ?? []);
-        setState({
-          ...state,
-          status: result.success ? "idle" : "error",
-          message: result.message,
-        });
-      });
+    if (status == "fetching") {
+      dispatch(fetchAll());
     }
+  }, []);
 
-    return () => {};
-  }, [state]);
-
-  function handleSearch(keyword?: string) {
-    console.log(keyword);
+  function handleSearch(keyword: string) {
+    dispatch(filter(keyword));
   }
 
   function handleInvitation() {}
 
   function toggleDialog() {
-    setState({ ...state, isDialogOpen: !state.isDialogOpen });
-  }
-
-  async function handleCreate() {
-    toggleDialog();
-  }
-
-  function handleDelete(documentId: string) {
-    window.electron.ipcRenderer
-      .invoke("delete-document", documentId)
-      .then((result: Result<void>) => {
-        if (result.success) {
-          setDocuments(documents.filter((d) => d.id !== documentId));
-        }
-      });
-  }
-
-  function handleShare(documentId: string) {
-    window.electron.ipcRenderer
-      .invoke(
-        "toggle-share-state",
-        documents.find((d) => d.id === documentId) as TextDocument
-      )
-      .then((result: Result<TextDocument>) => {
-        setDocuments(
-          documents.map((d) => {
-            if (d.id === documentId) {
-              return {
-                ...d,
-                shared: result.data?.shared ?? d.shared,
-              };
-            }
-            return d;
-          })
-        );
-      });
-  }
-
-  function handleOpen(documentId: string) {
-    navigate(`/app/documents/${documentId}`);
-  }
-
-  function handleNewDoc(newDoc: TextDocument) {
-    setDocuments((prevState) => [...prevState, newDoc]);
+    setIsDialogIsOpen(!isDialogOpen);
   }
 
   return (
     <div className="h-[100vh] flex-grow relative bg-white">
-      <NewDocumentModal
-        isOpen={state.isDialogOpen}
-        onClose={toggleDialog}
-        updateDocuments={handleNewDoc}
-      />
+      <NewDocumentModal isOpen={isDialogOpen} onClose={toggleDialog} />
       <div className="h-[100vh] overflow-y-scroll">
         <div className="flex gap-2 items-center ml-auto mr-auto mb-4 w-[90%]">
           <Searchbar disabled={disableControls} onChange={handleSearch} />
           <InviteButton onClick={handleInvitation} />
         </div>
-        <Content
-          status={state.status}
-          documents={documents}
-          onOpen={handleOpen}
-          onShare={handleShare}
-          onDelete={handleDelete}
-        />
+        <Content />
       </div>
       <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
-        <Button disabled={disableControls} onClick={handleCreate}>
+        <Button disabled={disableControls} onClick={toggleDialog}>
           Créer un nouveau document
         </Button>
       </div>

@@ -74,7 +74,7 @@ export default function Navbar({
   return (
     <nav
       className={clsx({
-        "bg-[#2c2c2c] h-[100vh] flex flex-col gap-4 relative": true,
+        "bg-[#2c2c2c] h-[100vh] flex flex-col gap-4 relative duration-300": true,
         "w-24": !expanded,
         "w-60": expanded,
       })}

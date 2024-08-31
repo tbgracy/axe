@@ -24,8 +24,8 @@ export default class DocumentService {
 
   async createNewDocument(
     title: string,
-    height: number,
-    width: number
+    height: number = 200,
+    width: number = 200
   ): Promise<Result<TextDocument>> {
     try {
       const document = await this.prisma.textDocument.create({
@@ -48,15 +48,16 @@ export default class DocumentService {
     }
   }
 
-  async deleteDocument(id: string): Promise<Result<void>> {
+  async deleteDocument(id: string): Promise<Result<TextDocument>> {
     try {
-      await this.prisma.textDocument.delete({
+      const deletedDocument = await this.prisma.textDocument.delete({
         where: {
           id,
         },
       });
       return {
         success: true,
+        data: deletedDocument,
       };
     } catch (err) {
       return {

@@ -8,24 +8,25 @@ import {
   Input,
   ModalFooter,
 } from "@chakra-ui/react";
+import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
 
 import Button from "@renderer/components/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createNew, selectStatus } from "./documentsSlice";
 
 type NewDocumentModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  updateDocuments: (newDoc: TextDocument) => void;
 };
 
 export default function NewDocumentModal({
   isOpen,
   onClose,
-  updateDocuments,
 }: NewDocumentModalProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useAppSelector(selectStatus) === "creating";
   const [title, setTitle] = useState("");
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -33,20 +34,13 @@ export default function NewDocumentModal({
     setTitle(e.target.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
-    window.electron.ipcRenderer
-      .invoke("create-document", title, 200, 200)
-      .then((result: Result<TextDocument>) => {
-        setTitle("");
-        setIsLoading(false);
-        if (result.success) {
-          updateDocuments(result.data!);
-          navigate(`/app/documents/${result.data?.id}`);
-          onClose();
-        }
-      });
+    const action = await dispatch(createNew(title));
+    if (createNew.fulfilled.match(action)) {
+      onClose();
+      navigate(`/app/documents/${action.payload.data?.id}`);
+    }
   }
 
   return (
