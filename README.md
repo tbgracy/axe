@@ -1,4 +1,4 @@
-<center><img width="100px" src="logo.png"/></center>
+<center><img width="100px" src="./resources/icon.png"/></center>
 
 # Axe 📝🤝
 
