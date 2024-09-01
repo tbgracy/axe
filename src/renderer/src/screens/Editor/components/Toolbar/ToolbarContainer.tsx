@@ -4,7 +4,12 @@ import Toolbar, { TextAlignment } from "./Toolbar";
 
 import EditorContext from "../../context";
 
-import { useBulletList, usePrint, useTextAlign, useTextFormat } from "./hooks";
+import {
+  useBulletList,
+  usePrint,
+  useTextAlignment,
+  useTextFormat,
+} from "./hooks";
 
 export function ToolbarContainer({ document }: { document: TextDocument }) {
   const editor = useContext(EditorContext);
@@ -12,6 +17,10 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
   const { handlePrint } = usePrint(editor!);
 
   const {
+    isBold,
+    isItalic,
+    isUnderlined,
+    currentLevel,
     handleFormatBold,
     handleFormatItalic,
     handleUnderline,
@@ -21,14 +30,19 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
   } = useTextFormat(editor!);
   const currentColor = editor?.getAttributes("textStyle").color;
 
-  const { setAlignment, currentAlignment } = useTextAlign(editor!);
+  const { setAlignment, currentAlignment } = useTextAlignment(editor!);
 
-  const handleBulletListToggle = useBulletList(editor!);
+  const { toggleBulletList, isBulletList } = useBulletList(editor!);
 
   return (
     <Toolbar
       document={document}
+      isBold={isBold}
+      isItalic={isItalic}
+      isUnderlined={isUnderlined}
+      isBulletList={isBulletList}
       currentAlignment={currentAlignment as TextAlignment}
+      currentLevel={currentLevel}
       onDelete={() => {}}
       onExport={() => {}}
       onPrint={handlePrint}
@@ -41,7 +55,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
       onFormatBold={handleFormatBold}
       onFormatItalic={handleFormatItalic}
       onFormatUnderline={handleUnderline}
-      onBulletListToggle={handleBulletListToggle}
+      onBulletListToggle={toggleBulletList}
     />
   );
 }

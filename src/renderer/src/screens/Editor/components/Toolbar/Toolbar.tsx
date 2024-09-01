@@ -22,14 +22,19 @@ function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
 }
 
-export type HeadingLevel = 1 | 2 | 3 | 4;
+export type HeadingLevel = 1 | 2 | 3 | 4 | "paragraph";
 
 export type TextAlignment = "left" | "right" | "center" | "justify";
 
 export type ToolbarProps = {
   document: TextDocument;
+  isBold: boolean;
+  isUnderlined: boolean;
+  isItalic: boolean;
+  isBulletList: boolean;
   currentColor: string;
   currentAlignment: TextAlignment;
+  currentLevel: HeadingLevel;
   onDelete: () => void;
   onExport: () => void;
   onPrint: () => void;
@@ -47,7 +52,12 @@ export type ToolbarProps = {
 const fontFamilies = ["Inter", "Galada", "Nunito", "Montserrat"];
 
 export default function Toolbar({
+  isBold,
+  isItalic,
+  isUnderlined,
+  isBulletList,
   currentAlignment,
+  currentLevel,
   onFormatBold,
   onFormatItalic,
   onFormatUnderline,
@@ -86,16 +96,18 @@ export default function Toolbar({
       <ToolbarButton
         tooltip={"Gras"}
         icon={<FormatBold />}
-        isActive
+        isActive={isBold}
         onClick={onFormatBold}
       />
       <ToolbarButton
         tooltip={"Italique"}
+        isActive={isItalic}
         icon={<FormatItalic />}
         onClick={onFormatItalic}
       />
       <ToolbarButton
         tooltip={"Souligner"}
+        isActive={isUnderlined}
         icon={<FormatUnderlined />}
         onClick={onFormatUnderline}
       />
@@ -120,10 +132,21 @@ export default function Toolbar({
         }
         className={dropdownStyle}
       >
-        <option value="1">Titre 1</option>
-        <option value="2">Titre 2</option>
-        <option value="3">Titre 3</option>
-        <option value="4">Titre 4</option>
+        <option selected={currentLevel === 1} value="1">
+          Titre 1
+        </option>
+        <option selected={currentLevel === 2} value="2">
+          Titre 2
+        </option>
+        <option selected={currentLevel === 3} value="3">
+          Titre 3
+        </option>
+        <option selected={currentLevel === 4} value="4">
+          Titre 4
+        </option>
+        <option selected={currentLevel === "paragraph"} value="paragraph">
+          Normal
+        </option>
       </select>
       <ToolbarButton
         icon={<FormatAlignJustify />}
@@ -157,6 +180,7 @@ export default function Toolbar({
         tooltip={"List à puce"}
         icon={<FormatListBulleted />}
         onClick={onBulletListToggle}
+        isActive={isBulletList}
       />
       <HorizontalSeparator />
       <ToolbarButton
