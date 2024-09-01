@@ -16,12 +16,12 @@ export default class UserService {
     };
   }
 
-  async getCurrentUser(): Promise<Result<User | undefined>> {
+  async getCurrentUser(): Promise<Result<User>> {
     try {
-      const user = await this.prisma.user.findFirst();
+      const user = await this.prisma.user.findFirstOrThrow();
       return {
         success: true,
-        data: user ? this._serialize(user) : undefined,
+        data: this._serialize(user),
       };
     } catch (err) {
       return {
@@ -41,6 +41,27 @@ export default class UserService {
       return {
         success: true,
         data: this._serialize(user),
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: `${err}`,
+      };
+    }
+  }
+
+  async delete(user?: User): Promise<Result<void>> {
+    try {
+      if (!user) {
+        user = (await this.getCurrentUser()).data;
+      }
+      await this.prisma.user.delete({
+        where: {
+          id: user!.id,
+        },
+      });
+      return {
+        success: true,
       };
     } catch (err) {
       return {

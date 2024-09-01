@@ -1,8 +1,9 @@
-import { app, shell, BrowserWindow } from "electron";
 import { join } from "path";
-import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import setupIpcHandlers from "./handlersSetup";
+import { app, shell, BrowserWindow } from "electron";
+import { electronApp, optimizer, is } from "@electron-toolkit/utils";
+
+import setupIpcHandlers from "./handlers";
 
 function createWindow(): void {
   // Create the browser window.

@@ -2,6 +2,8 @@ import { ipcMain } from "electron";
 import { documentsService } from "../services";
 
 export default function setupDocumentsHandlers() {
+  console.log('Setting up document handlers ...');
+  
   ipcMain.handle("create-document", async (_, title: string) => {
     const result = await documentsService.createNewDocument(title);
     return result;
