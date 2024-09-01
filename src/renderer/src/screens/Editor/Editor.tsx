@@ -17,7 +17,6 @@ export default function EditorScreen() {
         .then((result: Result<TextDocument>) => {
           setIsLoading(!isLoading);
           if (result.success) {
-            console.log(result.data?.content);
             setDocument(result.data);
           }
         });

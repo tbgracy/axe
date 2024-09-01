@@ -18,7 +18,6 @@ export default function useTextAlignment(editor: Editor) {
   }
 
   function setAlignment(alignment: TextAlignment) {
-    console.log(alignment);
     editor.chain().focus().setTextAlign(alignment).run();
   }
   return { setAlignment, currentAlignment };
