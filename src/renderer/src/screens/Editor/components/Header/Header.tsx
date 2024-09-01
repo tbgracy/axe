@@ -1,11 +1,11 @@
 import { clsx } from "clsx";
-
 import { Redo, Undo } from "@mui/icons-material";
-import DocumentTitle from "../DocumentTitle";
+
 import Toolbar from "../Toolbar";
 import UserRow from "../UserRow";
-import SyncStateComponent, { SyncState } from "./components/SynStateComponent";
+import DocumentTitle from "../DocumentTitle";
 import SaveButton from "./components/SaveButton";
+import SyncStateComponent, { SyncState } from "./components/SynStateComponent";
 
 export type HeaderProps = {
   users: User[];

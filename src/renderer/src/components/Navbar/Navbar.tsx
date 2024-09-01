@@ -8,8 +8,8 @@ import {
 import clsx from "clsx";
 
 import Logo from "../Logo";
-import Navlink from "../Navlink";
-import ThemeSwitch from "../ThemeSwitch";
+import Navlink from "./Navlink";
+import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
 import Avatar from "../Avatar";
 import ExpandButton from "./ExpandButton";

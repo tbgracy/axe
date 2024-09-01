@@ -1,4 +1,4 @@
-import Avatar from "../Avatar";
+import Avatar from "@renderer/components/Avatar";
 
 export default function UserRow({ users }: { users: User[] }) {
   return (

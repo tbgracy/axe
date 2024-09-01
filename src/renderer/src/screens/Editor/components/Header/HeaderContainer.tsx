@@ -1,6 +1,8 @@
 import { useContext } from "react";
+
 import Header, { HeaderProps } from "./Header";
-import EditorContext from "../../screens/Editor/context";
+
+import EditorContext from "../../context";
 
 export function HeaderContainer({
   users,

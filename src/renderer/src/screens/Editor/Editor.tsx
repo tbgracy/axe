@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
-import Content from "./Content";
+
+import Content from "./components/Content";
 
 export default function EditorScreen() {
   const { documentId } = useParams();

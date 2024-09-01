@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   AddLink,
   FormatAlignCenter,
@@ -13,9 +14,9 @@ import {
   Search,
   TableChartOutlined,
 } from "@mui/icons-material";
+
 import Menu from "./Menu";
 import ToolbarButton from "./ToolbarButton";
-import { useRef } from "react";
 
 function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
@@ -28,6 +29,7 @@ export type TextAlignment = "left" | "right" | "center" | "justify";
 export type ToolbarProps = {
   document: TextDocument;
   currentColor: string;
+  currentAlignment: TextAlignment;
   onDelete: () => void;
   onExport: () => void;
   onPrint: () => void;
@@ -45,6 +47,7 @@ export type ToolbarProps = {
 const fontFamilies = ["Inter", "Galada", "Nunito", "Montserrat"];
 
 export default function Toolbar({
+  currentAlignment,
   onFormatBold,
   onFormatItalic,
   onFormatUnderline,
@@ -83,6 +86,7 @@ export default function Toolbar({
       <ToolbarButton
         tooltip={"Gras"}
         icon={<FormatBold />}
+        isActive
         onClick={onFormatBold}
       />
       <ToolbarButton
@@ -126,24 +130,28 @@ export default function Toolbar({
         onClick={() => {
           onTextAlignChange("justify");
         }}
+        isActive={currentAlignment == "justify"}
       />
       <ToolbarButton
         icon={<FormatAlignLeft />}
         onClick={() => {
           onTextAlignChange("left");
         }}
+        isActive={currentAlignment == "left"}
       />
       <ToolbarButton
         icon={<FormatAlignCenter />}
         onClick={() => {
           onTextAlignChange("center");
         }}
+        isActive={currentAlignment == "center"}
       />
       <ToolbarButton
         icon={<FormatAlignRight />}
         onClick={() => {
           onTextAlignChange("right");
         }}
+        isActive={currentAlignment == "right"}
       />
       <ToolbarButton
         tooltip={"List à puce"}

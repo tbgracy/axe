@@ -1,5 +1,6 @@
-import EditorContext from "../../screens/Editor/context";
 import { ReactNode, useContext } from "react";
+
+import EditorContext from "../../context";
 
 type SheetProps = {
   children: ReactNode;

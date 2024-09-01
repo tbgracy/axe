@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import EditorContext from "../../screens/Editor/context";
+import Toolbar, { TextAlignment } from "./Toolbar";
 
-import Toolbar from "./Toolbar";
+import EditorContext from "../../context";
 
 import { useBulletList, usePrint, useTextAlign, useTextFormat } from "./hooks";
 
@@ -21,22 +21,22 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
   } = useTextFormat(editor!);
   const currentColor = editor?.getAttributes("textStyle").color;
 
-  const handleTextAlign = useTextAlign(editor!);
+  const { setAlignment, currentAlignment } = useTextAlign(editor!);
 
   const handleBulletListToggle = useBulletList(editor!);
 
   return (
     <Toolbar
       document={document}
+      currentAlignment={currentAlignment as TextAlignment}
       onDelete={() => {}}
-      onShare={() => {}}
       onExport={() => {}}
       onPrint={handlePrint}
       currentColor={currentColor}
       onMoreInfo={() => {}}
       onChangeFont={handleFontChange}
       onChangeColor={handleColorChange}
-      onTextAlignChange={handleTextAlign}
+      onTextAlignChange={setAlignment}
       onHeadingChange={handleHeadingChange}
       onFormatBold={handleFormatBold}
       onFormatItalic={handleFormatItalic}

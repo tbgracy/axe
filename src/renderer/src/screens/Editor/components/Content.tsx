@@ -1,8 +1,9 @@
 import { EditorContent, useEditor } from "@tiptap/react";
-import Sheet from "../../components/Sheet";
-import Header from "../../components/Header";
-import Statusbar from "../../components/Statusbar";
-import EditorContext from "./context";
+
+import Sheet from "./Sheet";
+import Header from "./Header";
+import Statusbar from "./Statusbar";
+import EditorContext from "../context";
 
 import Color from "@tiptap/extension-color";
 import StarterKit from "@tiptap/starter-kit";

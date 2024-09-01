@@ -1,6 +1,7 @@
-import { MoreVert, Print, Info, IosShare, Delete } from "@mui/icons-material";
 import { useRef } from "react";
 import useMenu from "@renderer/hooks/useMenu";
+import { MoreVert, Print, Info, IosShare, Delete } from "@mui/icons-material";
+
 import { ToolbarProps } from "./Toolbar";
 
 export default function Menu({
