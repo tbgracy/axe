@@ -1,14 +1,11 @@
 import { ipcMain } from "electron";
-import { documentsService } from "./services";
+import { documentsService } from "../services";
 
-export default function setupDocumentsIpcHandlers() {
-  ipcMain.handle(
-    "create-document",
-    async (_, title: string) => {
-      const result = await documentsService.createNewDocument(title);
-      return result;
-    }
-  );
+export default function setupDocumentsHandlers() {
+  ipcMain.handle("create-document", async (_, title: string) => {
+    const result = await documentsService.createNewDocument(title);
+    return result;
+  });
 
   ipcMain.handle("fetch-documents", async (_) => {
     const result = await documentsService.getDocuments();
