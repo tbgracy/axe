@@ -29,7 +29,7 @@ export default function RoleChoice() {
       <div className="flex flex-col items-center justify-center">
         <Logo />
         <h1 className="font-sans">
-          Bienvenu <span className="text-primary">AXE</span>
+          Bienvenu sur <span className="text-primary">AXE</span>
         </h1>
         <p>
           Votre application de traitement de text <br /> collaboratif préféré
