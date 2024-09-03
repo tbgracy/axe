@@ -7,6 +7,7 @@ import Logo from "../../components/Logo";
 import Registration from "./Registration";
 
 import { getCurrentUser, selectStatus, selectStep } from "./onboardingSlice";
+import { Progress } from "@chakra-ui/react";
 
 export default function Splashscreen() {
   const dispatch = useAppDispatch();
@@ -38,7 +39,12 @@ export default function Splashscreen() {
     <div className="w-screen h-screen flex flex-col items-center justify-center">
       <Logo />
       <h1 className="text-primary">Axe</h1>
-      <p className="absolute bottom-2">Veuillez patienter ... </p>
+      <p className="text-slate-600 text-sm">
+        Chargement en cours, veuillez patienter ...{" "}
+      </p>
+      <div className="absolute bottom-0">
+        <Progress isIndeterminate size="sm" className="w-screen" />
+      </div>
     </div>
   );
 }
