@@ -17,6 +17,7 @@ import {
 
 export default function Content() {
   const status = useAppSelector(selectStatus);
+  const role = useAppSelector((state) => state.role.role);
   const filter = useAppSelector((state) => state.documents.filter);
   const allDocuments = useAppSelector((state) => state.documents.documents);
   const filteredDocuments = useAppSelector(selectDocuments);
@@ -70,8 +71,8 @@ export default function Content() {
               key={d.id}
               document={d}
               onOpen={() => handleOpen(d.id)}
-              onShare={() => handleShare(d)}
-              onDelete={() => handleDelete(d.id)}
+              onShare={role === "host" ? () => handleShare(d) : undefined}
+              onDelete={role === "host" ? () => handleDelete(d.id) : undefined}
             />
           ))}
         </div>

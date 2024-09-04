@@ -4,7 +4,7 @@ import { createNew, deleteOne, fetchAll, toggleShare } from "./thunks";
 import { selectStatus, selectDocuments } from "./selectors";
 
 export type DocumentsState = {
-  status: "fetching" | "error" | "idle" | "inviting" | "creating";
+  status: "fetching" | "error" | "idle" | "creating";
   documents: TextDocument[];
   filter: string;
   message?: string;
@@ -20,9 +20,6 @@ const documentSlice = createSlice({
   name: "documents",
   initialState,
   reducers: {
-    invite: (state) => {
-      state.status = "inviting";
-    },
     filter: (state, action: PayloadAction<string>) => {
       state.filter = action.payload;
     },
@@ -48,7 +45,9 @@ const documentSlice = createSlice({
           state.status = "idle";
           state.documents = action.payload.data!;
         } else {
+          console.log(action.payload);
           state.status = "error";
+          state.message = action.payload.message;
         }
       })
       .addCase(deleteOne.fulfilled, (state, action) => {
@@ -78,7 +77,7 @@ const documentSlice = createSlice({
 });
 
 export { createNew, fetchAll, deleteOne, toggleShare };
-export const { invite, filter } = documentSlice.actions;
+export const { filter } = documentSlice.actions;
 export { selectDocuments, selectStatus };
 
 export default documentSlice.reducer;

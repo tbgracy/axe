@@ -33,34 +33,38 @@ export default function Menu({
           >
             <Launch /> Ouvrir
           </li>
-          <li
-            className={menuItemClass}
-            onClick={() => {
-              setOpen(false);
-              onShare();
-            }}
-          >
-            <Share />
-            <label htmlFor="share" className="cursor-pointer mr-auto">
-              Partager
-            </label>
-            <input
-              id="share"
-              type="checkbox"
-              checked={document.shared}
-              className="cursor-pointer"
-            />
-          </li>
-          <li
-            className={`${menuItemClass} text-warning`}
-            onClick={() => {
-              setOpen(false);
-              onDelete();
-            }}
-          >
-            <Delete />
-            Supprimer
-          </li>
+          {onShare && (
+            <li
+              className={menuItemClass}
+              onClick={() => {
+                setOpen(false);
+                onShare();
+              }}
+            >
+              <Share />
+              <label htmlFor="share" className="cursor-pointer mr-auto">
+                Partager
+              </label>
+              <input
+                id="share"
+                type="checkbox"
+                checked={document.shared}
+                className="cursor-pointer"
+              />
+            </li>
+          )}
+          {onDelete && (
+            <li
+              className={`${menuItemClass} text-warning`}
+              onClick={() => {
+                setOpen(false);
+                onDelete();
+              }}
+            >
+              <Delete />
+              Supprimer
+            </li>
+          )}
         </ul>
       )}
     </div>

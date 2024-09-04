@@ -3,8 +3,8 @@ import Menu from "./MenuComponent";
 export type DocumentCardProps = {
   document: TextDocument;
   onOpen: () => void;
-  onShare: () => void;
-  onDelete: () => void;
+  onShare?: () => void;
+  onDelete?: () => void;
 };
 
 export default function DocumentCard({

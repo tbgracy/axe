@@ -21,7 +21,7 @@ type NavbarProps = {
   themeMode: ThemeMode;
   onGoBack: () => void;
   onGoToHelp: () => void;
-  onGoToSessionManager: () => void;
+  onGoToSessionManager?: () => void;
   onGoToSettings: () => void;
   onGoToAbout: () => void;
   onSwitchTheme: () => void;
@@ -51,7 +51,7 @@ export default function Navbar({
       onClick: onGoToHelp,
       label: "Aide",
     },
-    {
+    onGoToSessionManager && {
       icon: <JoinInner />,
       onClick: onGoToSessionManager,
       label: "Gestion de session",
@@ -87,18 +87,20 @@ export default function Navbar({
         <ExpandButton expanded={expanded} onClick={handleExpansion} />
       </div>
       <ul className="space-y-2">
-        {linksData.map((link) => (
-          <li key={link.label}>
-            <Navlink
-              expanded={expanded}
-              icon={link.icon}
-              onClick={link.onClick}
-              current={link.current}
-            >
-              {link.label}
-            </Navlink>
-          </li>
-        ))}
+        {linksData
+          .filter((link) => link !== undefined)
+          .map((link) => (
+            <li key={link!.label}>
+              <Navlink
+                expanded={expanded}
+                icon={link!.icon}
+                onClick={link!.onClick}
+                current={link!.current}
+              >
+                {link!.label}
+              </Navlink>
+            </li>
+          ))}
       </ul>
       <div className="flex mt-[auto] items-center flex-col p-4 gap-4">
         <ThemeSwitch
