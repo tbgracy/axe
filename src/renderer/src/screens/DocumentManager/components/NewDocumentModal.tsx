@@ -39,7 +39,7 @@ export default function NewDocumentModal({
     const action = await dispatch(createNew(title));
     if (createNew.fulfilled.match(action)) {
       onClose();
-      navigate(`/app/documents/${action.payload.data?.id}`);
+      navigate(`/documents/${action.payload.data?.id}`);
     }
   }
 

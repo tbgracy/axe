@@ -29,7 +29,7 @@ export default function Content() {
   }
 
   function handleOpen(documentId: string) {
-    navigate(`/app/documents/${documentId}`);
+    navigate(`/documents/${documentId}`);
   }
 
   function handleShare(document: TextDocument) {

@@ -16,10 +16,11 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
     element: <RoleChoice />,
   },
   {
-    path: "/app",
+    path: "/",
     element: <Layout />,
     children: [
       {
+        index: true,
         path: "documents",
         element: <DocumentManager />,
       },
