@@ -32,7 +32,7 @@ export default function Splashscreen() {
   }
 
   if (nextStep === "home") {
-    return <Navigate to="/app/documents" />;
+    return <Navigate to="/choice" />;
   }
 
   return (

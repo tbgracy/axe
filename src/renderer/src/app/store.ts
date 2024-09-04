@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { documents } from "@renderer/screens/DocumentManager";
+
+import { role } from "@renderer/screens/RoleChoice";
 import { onboarding } from "@renderer/screens/Onboarding";
+import { documents } from "@renderer/screens/DocumentManager";
 
 export const store = configureStore({
   reducer: {
+    role,
     documents,
     onboarding,
   },

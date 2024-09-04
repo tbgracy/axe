@@ -78,4 +78,8 @@ ul {
     font-style: italic;
     src: url("./assets/fonts/Nunito-Italic-VariableFont_wght.ttf");
   }
+
+  * {
+    font-family: 'Inter';
+  }
 }
