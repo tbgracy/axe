@@ -1,3 +1,4 @@
+import { useAppSelector } from "@renderer/app/hooks";
 import Button from "@renderer/components/Button";
 
 type ChoiceCardProps = {
@@ -13,10 +14,13 @@ export default function ChoiceCard({
   description,
   onClick,
 }: ChoiceCardProps) {
+  const disabled = useAppSelector((state) => state.role.status) === "loading";
   return (
     <div className="flex flex-col items-center justify-end w-[20rem] gap-4">
       <img src={illustration} className="size-[15rem]" />
-      <Button onClick={onClick}>{cta}</Button>
+      <Button disabled={disabled} onClick={onClick}>
+        {cta}
+      </Button>
       <p className="text-sm">{description}</p>
     </div>
   );
