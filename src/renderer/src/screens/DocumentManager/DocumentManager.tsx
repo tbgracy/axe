@@ -8,8 +8,9 @@ import Searchbar from "./components/Searchbar";
 import InviteButton from "./components/InviteButton";
 import NewDocumentModal from "./components/NewDocumentModal";
 
-import { filter, fetchAll, selectStatus } from "./documentsSlice";
+import { filter, fetchAll, selectStatus, refresh } from "./documentsSlice";
 import { useToast } from "@chakra-ui/react";
+import RefreshButton from "./components/RefreshButton";
 
 export default function DocumentManager() {
   const [isDialogOpen, setIsDialogIsOpen] = useState(false);
@@ -24,9 +25,6 @@ export default function DocumentManager() {
     if (status == "fetching") {
       dispatch(fetchAll());
     }
-  }, [status]);
-
-  useEffect(() => {
     if (status === "error") {
       toast({
         title: "Une erreur est survenue",
@@ -51,8 +49,9 @@ export default function DocumentManager() {
       <NewDocumentModal isOpen={isDialogOpen} onClose={toggleDialog} />
       <div className="h-[100vh] overflow-y-scroll">
         <div className="flex gap-2 items-center ml-auto mr-auto mb-4 w-[90%]">
-          <Searchbar disabled={disableControls} onChange={handleSearch} />
           <InviteButton onClick={handleInvitation} />
+          <Searchbar disabled={disableControls} onChange={handleSearch} />
+          <RefreshButton onClick={() => dispatch(refresh())} />
         </div>
         <Content />
       </div>

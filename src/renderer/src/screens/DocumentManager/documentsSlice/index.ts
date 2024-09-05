@@ -26,6 +26,9 @@ const documentSlice = createSlice({
     deleteMessage: (state) => {
       state.message = undefined;
     },
+    refresh: (state) => {
+      state.status = "fetching";
+    },
   },
   extraReducers(builder) {
     builder
@@ -77,7 +80,7 @@ const documentSlice = createSlice({
 });
 
 export { createNew, fetchAll, deleteOne, toggleShare };
-export const { filter } = documentSlice.actions;
+export const { filter, deleteMessage, refresh } = documentSlice.actions;
 export { selectDocuments, selectStatus };
 
 export default documentSlice.reducer;
