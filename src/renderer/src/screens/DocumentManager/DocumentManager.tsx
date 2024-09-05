@@ -11,9 +11,11 @@ import NewDocumentModal from "./components/NewDocumentModal";
 import { filter, fetchAll, selectStatus, refresh } from "./documentsSlice";
 import { useToast } from "@chakra-ui/react";
 import RefreshButton from "./components/RefreshButton";
+import InvitationModal from "./components/InvitationModal";
 
 export default function DocumentManager() {
-  const [isDialogOpen, setIsDialogIsOpen] = useState(false);
+  const [isNewDocModalOpen, setIsNewDocModalOpen] = useState(false);
+  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
   const role = useAppSelector((state) => state.role.role);
@@ -38,18 +40,25 @@ export default function DocumentManager() {
     dispatch(filter(keyword));
   }
 
-  function handleInvitation() {}
-
-  function toggleDialog() {
-    setIsDialogIsOpen(!isDialogOpen);
+  function toggleNewDocModal() {
+    setIsNewDocModalOpen(!isNewDocModalOpen);
   }
 
   return (
     <div className="h-[100vh] flex-grow relative bg-white">
-      <NewDocumentModal isOpen={isDialogOpen} onClose={toggleDialog} />
+      <NewDocumentModal
+        isOpen={isNewDocModalOpen}
+        onClose={toggleNewDocModal}
+      />
+      <InvitationModal
+        isOpen={isInvitationModalOpen}
+        onClose={() => setIsInvitationModalOpen(false)}
+      />
       <div className="h-[100vh] overflow-y-scroll">
         <div className="flex gap-2 items-center ml-auto mr-auto mb-4 w-[90%]">
-          <InviteButton onClick={handleInvitation} />
+          {role === "host" && (
+            <InviteButton onClick={() => setIsInvitationModalOpen(true)} />
+          )}
           <Searchbar disabled={disableControls} onChange={handleSearch} />
           <RefreshButton onClick={() => dispatch(refresh())} />
         </div>
@@ -57,7 +66,7 @@ export default function DocumentManager() {
       </div>
       {role === "host" && (
         <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
-          <Button disabled={disableControls} onClick={toggleDialog}>
+          <Button disabled={disableControls} onClick={toggleNewDocModal}>
             Créer un nouveau document
           </Button>
         </div>
