@@ -27,7 +27,7 @@ export const startServer = createAsyncThunk<Result<string>>(
   "role/startServer",
   async () => {
     window.electron.ipcRenderer.send("start-server");
-    const RETRY = 5;
+    const RETRY = 10;
     for (let i = 0; i < RETRY; i++) {
       console.log("TRY #", i);
       await new Promise((resolve) => setTimeout(resolve, 2000));
