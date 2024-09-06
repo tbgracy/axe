@@ -1,15 +1,12 @@
-import path, { join } from "path";
+import { join } from "path";
 import icon from "../../resources/icon.png?asset";
 import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 
 import setupIpcHandlers from "./handlers";
-import { ChildProcess, fork } from "child_process";
+import { startServer, stopServer } from "./utils/serverToggle";
 
-let serverProcess: ChildProcess | null;
-
-function createWindow(): void {
-  // Create the browser window.
+function createWindow() {
   const mainWindow = new BrowserWindow({
     minHeight: 670,
     minWidth: 900,
@@ -64,28 +61,8 @@ app.on("window-all-closed", () => {
   app.quit();
 });
 
-app.on("quit", () => {
-  if (serverProcess) {
-    serverProcess.kill();
-  }
-});
+app.on("quit", stopServer);
 
-ipcMain.on("start-server", () => {
-  if (!serverProcess) {
-    serverProcess = fork(path.join(__dirname, "server.js"));
-    serverProcess.on("message", (message) => {
-      console.log("Message  from server : ", message);
-    });
+ipcMain.on("start-server", startServer);
 
-    serverProcess.on("exit", (code) => {
-      console.log(`Server process exited with code ${code}`);
-      serverProcess = null;
-    });
-  }
-});
-
-ipcMain.on("stop-server", () => {
-  if (serverProcess) {
-    serverProcess.kill();
-  }
-});
+ipcMain.on("stop-server", stopServer);
