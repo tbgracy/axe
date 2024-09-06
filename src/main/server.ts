@@ -22,6 +22,13 @@ app.get("/documents", async (_, res) => {
   res.send(result);
 });
 
+app.get("/documents/:documentId", async (req, res) => {
+  const result = await documentsService.openDocument(req.params.documentId);
+  if (result.success) {
+    res.send(result);
+  }
+});
+
 app.listen(port, () => {
-  console.log("Example app listening on port 3000");
+  console.log("Axe express server listening on port 3000");
 });
