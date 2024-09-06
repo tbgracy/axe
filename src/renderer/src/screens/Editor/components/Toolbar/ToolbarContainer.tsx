@@ -1,20 +1,14 @@
-import { useContext } from "react";
-
 import Toolbar, { TextAlignment } from "./Toolbar";
-
-import EditorContext from "../../context";
 
 import {
   useBulletList,
   usePrint,
   useTextAlignment,
   useTextFormat,
-} from "./hooks";
+} from "../../hooks";
 
 export function ToolbarContainer({ document }: { document: TextDocument }) {
-  const editor = useContext(EditorContext);
-
-  const { handlePrint } = usePrint(editor!);
+  const handlePrint = usePrint();
 
   const {
     isBold,
@@ -27,12 +21,13 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
     handleFontChange,
     handleColorChange,
     handleHeadingChange,
-  } = useTextFormat(editor!);
-  const currentColor = editor?.getAttributes("textStyle").color;
+  } = useTextFormat();
 
-  const { setAlignment, currentAlignment } = useTextAlignment(editor!);
+  const currentColor = "";
 
-  const { toggleBulletList, isBulletList } = useBulletList(editor!);
+  const { setAlignment, currentAlignment } = useTextAlignment();
+
+  const { toggleBulletList, isBulletList } = useBulletList();
 
   return (
     <Toolbar

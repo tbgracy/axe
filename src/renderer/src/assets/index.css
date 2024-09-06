@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.ProseMirror:focus {
+div[data-slate-editor="true"]:focus {
   outline: none;
 }
 
