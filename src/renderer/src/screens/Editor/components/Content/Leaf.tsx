@@ -8,6 +8,7 @@ export default function Leaf({ attributes, children, leaf }: RenderLeafProps) {
         fontWeight: leaf.bold ? "bold" : "normal",
         fontStyle: leaf.italic ? "italic" : "normal",
         textDecoration: leaf.underline ? "underline" : "none",
+        color: leaf.color ? leaf.color : undefined,
       }}
     >
       {children}

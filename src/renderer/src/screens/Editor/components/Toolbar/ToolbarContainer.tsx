@@ -15,6 +15,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
     isItalic,
     isUnderlined,
     currentLevel,
+    currentColor,
     handleFormatBold,
     handleFormatItalic,
     handleUnderline,
@@ -22,8 +23,6 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
     handleColorChange,
     handleHeadingChange,
   } = useTextFormat();
-
-  const currentColor = "";
 
   const { setAlignment, currentAlignment } = useTextAlignment();
 

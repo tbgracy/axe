@@ -4,7 +4,18 @@ import { ReactEditor, useSlate } from "slate-react";
 import { FormatType } from "../components/Content";
 import { HeadingLevel } from "../components/Toolbar";
 
-const toggleMark = (editor: Editor, format: FormatType) => {
+function colorText(editor: Editor, color: string) {
+  Editor.addMark(editor, "color", color);
+  ReactEditor.focus(editor);
+}
+
+function getCurrentColor(editor: Editor) {
+  const marks = Editor.marks(editor);
+  const color = marks?.color ?? "black";
+  return color;
+}
+
+function toggleMark(editor: Editor, format: FormatType) {
   const isActive = isMarkActive(editor, format);
   if (isActive) {
     Editor.removeMark(editor, format);
@@ -12,12 +23,12 @@ const toggleMark = (editor: Editor, format: FormatType) => {
     Editor.addMark(editor, format, true);
   }
   ReactEditor.focus(editor);
-};
+}
 
-const isMarkActive = (editor: Editor, format: FormatType) => {
+function isMarkActive(editor: Editor, format: FormatType) {
   const marks = Editor.marks(editor);
   return marks ? marks[format] === true : false;
-};
+}
 
 export default function useTextFormat() {
   const editor = useSlate();
@@ -25,6 +36,7 @@ export default function useTextFormat() {
   const isBold = isMarkActive(editor, "bold");
   const isItalic = isMarkActive(editor, "italic");
   const isUnderlined = isMarkActive(editor, "underline");
+  const currentColor = getCurrentColor(editor);
   let currentLevel: HeadingLevel;
 
   currentLevel = "paragraph";
@@ -43,7 +55,9 @@ export default function useTextFormat() {
 
   function handleFontChange(fontFamily: string) {}
 
-  function handleColorChange(color: string) {}
+  function handleColorChange(color: string) {
+    colorText(editor, color);
+  }
 
   function handleHeadingChange(level: HeadingLevel) {
     if (level === "paragraph") {
@@ -56,6 +70,7 @@ export default function useTextFormat() {
     isItalic,
     isUnderlined,
     currentLevel,
+    currentColor,
     handleFormatBold,
     handleFormatItalic,
     handleUnderline,

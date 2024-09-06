@@ -6,7 +6,6 @@ import {
   FormatAlignLeft,
   FormatAlignRight,
   FormatBold,
-  FormatColorText,
   FormatItalic,
   FormatListBulleted,
   FormatUnderlined,
@@ -16,7 +15,7 @@ import {
 } from "@mui/icons-material";
 
 import Menu from "./Menu";
-import ToolbarButton from "./ToolbarButton";
+import ToolbarButton, { TextColorButton } from "./ToolbarButton";
 
 function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
@@ -111,10 +110,9 @@ export default function Toolbar({
         icon={<FormatUnderlined />}
         onClick={onFormatUnderline}
       />
-      <ToolbarButton
-        tooltip={"Changer la couleur du text"}
+      <TextColorButton
+        tooltip="Changer la couleur du text"
         color={currentColor}
-        icon={<FormatColorText />}
         onClick={handleColorChange}
       />
       <input

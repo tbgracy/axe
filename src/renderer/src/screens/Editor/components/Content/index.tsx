@@ -26,6 +26,7 @@ type CustomText = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
+  color?: string;
 };
 
 type CustomElement = { type: "paragraph"; children: CustomText[] };
