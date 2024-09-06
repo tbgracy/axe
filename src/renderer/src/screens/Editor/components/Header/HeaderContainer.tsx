@@ -1,11 +1,11 @@
 import Header, { HeaderProps } from "./Header";
-import { useHistoryActions } from "../../hooks";
+import { useHistoryActions, useSave } from "../../hooks";
 
 export function HeaderContainer({
   users,
   document,
 }: Pick<HeaderProps, "users" | "document">) {
-  const handleSave = () => {};
+  const handleSave = useSave(document);
 
   const { handleRedo, handleUndo } = useHistoryActions();
 
