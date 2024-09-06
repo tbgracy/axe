@@ -38,15 +38,20 @@ declare module "slate" {
   }
 }
 
-const initialValue: Descendant[] = [
-  {
-    type: "paragraph",
-    children: [{ text: "This is an initial tex" }],
-  },
-];
-
 export default function Content({ document }: { document: TextDocument }) {
   const [editor] = useState(() => withReact(withHistory(createEditor())));
+  let initialValue: Descendant[];
+
+  try {
+    initialValue = JSON.parse(document.content);
+  } catch {
+    initialValue = [
+      {
+        type: "paragraph",
+        children: [{ text: "" }],
+      },
+    ];
+  }
 
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
