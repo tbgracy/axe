@@ -53,7 +53,9 @@ export default function useTextFormat() {
     toggleMark(editor, "underline");
   }
 
-  function handleFontChange(fontFamily: string) {}
+  function handleFontChange(fontFamily: string) {
+    console.log(fontFamily)
+  }
 
   function handleColorChange(color: string) {
     colorText(editor, color);

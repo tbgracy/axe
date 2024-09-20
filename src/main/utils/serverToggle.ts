@@ -1,5 +1,7 @@
 import path from "path";
 import { ChildProcess, fork } from "child_process";
+import findRootDir from "./findRootDir";
+import isDev from "./isDev";
 
 let expressServerProcess: ChildProcess | undefined;
 
@@ -19,8 +21,11 @@ export function startServer() {
   }
 
   if (!websocketServerProcess) {
+    const appRootDir = findRootDir(__dirname);
+    const yWebsocketServerPath = `${isDev() ? "../.." : appRootDir}/node_modules/y-websocket/bin/server.cjs`;
+    console.log(process.resourcesPath);
     websocketServerProcess = fork(
-      path.join(__dirname, "../../node_modules/y-websocket/bin/server.cjs"),
+      path.join(isDev() ? __dirname : "", yWebsocketServerPath),
       {
         env: {
           HOST: "0.0.0.0",

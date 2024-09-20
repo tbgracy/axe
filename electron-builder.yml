@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: axe
+appId: mg.tbgracy.axe
+productName: Axe
 directories:
   buildResources: build
 files:
