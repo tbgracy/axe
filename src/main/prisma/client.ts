@@ -2,25 +2,14 @@ import { PrismaClient } from "@prisma/client";
 
 import path from "path";
 import fs from "fs";
+import findRootDir from "../utils/findRootDir";
+import isDev from "../utils/isDev";
 
 let dbPath: string;
 
-function findRootDir(currentDir: string): string {
-  if (fs.existsSync(path.join(currentDir, "package.json"))) {
-    return currentDir;
-  }
-  const parentDir = path.dirname(currentDir);
-  if (parentDir === currentDir) {
-    throw new Error("Project root not found");
-  }
-  return findRootDir(parentDir);
-}
-
 const rootDir = findRootDir(__dirname);
 
-const isDev = process.env.NODE_ENV === "development";
-
-if (isDev) {
+if (isDev()) {
   dbPath = path.join(rootDir, "src/main/prisma/dev.db");
 } else {
   const userDataPath =
