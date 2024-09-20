@@ -1,7 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 
-import { is } from "@electron-toolkit/utils";
-import { app } from "electron";
 import path from "path";
 import fs from "fs";
 
@@ -20,14 +18,17 @@ function findRootDir(currentDir: string): string {
 
 const rootDir = findRootDir(__dirname);
 
-console.log("Project root:", rootDir);
-
-const isDev = is.dev;
+const isDev = process.env.NODE_ENV === "development";
 
 if (isDev) {
   dbPath = path.join(rootDir, "src/main/prisma/dev.db");
 } else {
-  const userDataPath = app.getPath("userData");
+  const userDataPath =
+    process.env.APPDATA ||
+    (process.platform === "darwin"
+      ? process.env.HOME + "/Library/Preferences"
+      : process.env.HOME + "/.local/share");
+
   dbPath = path.join(userDataPath, "dev.db");
 
   const resourcePath = process.resourcesPath;
