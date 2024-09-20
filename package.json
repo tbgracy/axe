@@ -22,6 +22,19 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "build": {
+    "extraResources": [
+      "prisma/**/*",
+      "node_modules/.prisma/**/*",
+      "node_modules/@prisma/client/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "src/main/prisma/dev.db",
+        "to": "resources/dev.db"
+      }
+    ]
+  },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@electron-toolkit/preload": "^3.0.1",
