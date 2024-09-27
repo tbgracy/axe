@@ -23,7 +23,7 @@ export default function Navlink({
         "flex font-bold gap-2 hover:bg-[rgba(255,255,255,0.14)] py-2 px-4 cursor-pointer":
           true,
         "text-white": current,
-        "text-[#cdcdcd]": !current,
+        "text-lightGrey": !current,
         "justify-center ": !expanded,
       })}
       title={!expanded ? children?.toString() : ""}

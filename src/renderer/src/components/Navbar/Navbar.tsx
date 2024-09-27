@@ -13,31 +13,30 @@ import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
 import Avatar from "../Avatar";
 import ExpandButton from "./ExpandButton";
-
-type ThemeMode = "dark" | "light";
+import { useAppDispatch, useAppSelector } from "@renderer/app/hooks";
+import { selectTheme, toggleThemeMode } from "@renderer/app/themeSlice";
 
 type NavbarProps = {
   user?: User;
-  themeMode: ThemeMode;
   onGoBack: () => void;
   onGoToHelp: () => void;
   onGoToSessionManager?: () => void;
   onGoToSettings: () => void;
   onGoToAbout: () => void;
-  onSwitchTheme: () => void;
 };
 
 export default function Navbar({
   user,
-  themeMode,
   onGoBack,
   onGoToHelp,
   onGoToSessionManager,
   onGoToSettings,
   onGoToAbout,
-  onSwitchTheme,
 }: NavbarProps) {
   const [expanded, setExpanded] = useState<boolean>(true);
+
+  const themeMode = useAppSelector(selectTheme);
+  const dispatch = useAppDispatch();
 
   const linksData = [
     {
@@ -75,7 +74,7 @@ export default function Navbar({
   return (
     <nav
       className={clsx({
-        "bg-[#2c2c2c] h-[100vh] flex flex-col gap-4 relative duration-300":
+        "bg-darkGrey dark:bg-gray-950 h-[100vh] flex flex-col gap-4 relative duration-300":
           true,
         "w-24": !expanded,
         "w-60": expanded,
@@ -106,7 +105,7 @@ export default function Navbar({
         <ThemeSwitch
           expanded={expanded}
           mode={themeMode}
-          onClick={onSwitchTheme}
+          onClick={() => dispatch(toggleThemeMode())}
         />
         <Avatar expanded={expanded} user={user} />
       </div>

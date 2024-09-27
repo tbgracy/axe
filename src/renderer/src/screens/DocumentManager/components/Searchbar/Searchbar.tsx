@@ -35,6 +35,7 @@ export default function Searchbar({
       className={clsx({
         "cursor-not-allowed *:cursor-not-allowed": disabled,
         "bg-[#f2f2f2] h-fit rounded-[20px] p-4 flex gap-2 w-full": true,
+        "dark:bg-opacity-10 dark:text-lightGrey": true,
       })}
       onClick={handleClick}
     >

@@ -14,7 +14,7 @@ export default function DocumentCard({
   onDelete,
 }: DocumentCardProps) {
   return (
-    <article className="bg-white relative w-[200px] h-[250px] rounded-[20px] border border-[#d8d8d8]">
+    <article className="bg-white relative w-[200px] h-[250px] rounded-[20px] border border-[#d8d8d8] dark:border-none">
       {document.shared && (
         <span
           title="Document partagé"

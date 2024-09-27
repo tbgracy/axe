@@ -4,11 +4,14 @@ import { role } from "@renderer/screens/RoleChoice";
 import { onboarding } from "@renderer/screens/Onboarding";
 import { documents } from "@renderer/screens/DocumentManager";
 
+import theme from "./themeSlice";
+
 export const store = configureStore({
   reducer: {
     role,
     documents,
     onboarding,
+    theme,
   },
 });
 

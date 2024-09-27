@@ -45,7 +45,7 @@ export default function DocumentManager() {
   }
 
   return (
-    <div className="h-[100vh] flex-grow relative bg-white">
+    <div className="h-[100vh] flex-grow relative bg-white dark:bg-darkGrey">
       <NewDocumentModal
         isOpen={isNewDocModalOpen}
         onClose={toggleNewDocModal}

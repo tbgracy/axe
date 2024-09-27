@@ -15,7 +15,8 @@ export default function Menu({
 
   const { handleClick, open, setOpen } = useMenu(menuRef);
 
-  const menuItemClass = "flex gap-2 hover:bg-gray-200 p-2 rounded-[10px]";
+  const menuItemClass =
+    "flex gap-2 hover:bg-gray-200 p-2 rounded-[10px] dark:hover:bg-opacity-10";
 
   return (
     <div className="absolute right-1 top-2 cursor-pointer" ref={menuRef}>
@@ -23,7 +24,7 @@ export default function Menu({
         <MoreVert />
       </div>
       {open && (
-        <ul className="absolute bg-white w-44 drop-shadow-md rounded-[10px] p-4 space-y-4 right-2 top-6 z-10">
+        <ul className="absolute bg-white w-44 drop-shadow-md rounded-[10px] p-4 space-y-4 right-2 top-6 z-10 dark:bg-darkGrey dark:text-lightGrey">
           <li
             className={menuItemClass}
             onClick={() => {

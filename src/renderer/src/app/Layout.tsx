@@ -20,13 +20,11 @@ export default function Layout() {
       <div className="w-fit">
         <Navbar
           user={user}
-          themeMode="dark"
           onGoBack={handleGoBack}
           onGoToHelp={handleGoToHelp}
           onGoToAbout={handleGoBack}
           onGoToSessionManager={handleGoBack}
           onGoToSettings={handleGoBack}
-          onSwitchTheme={() => {}}
         />
       </div>
       <Outlet />
