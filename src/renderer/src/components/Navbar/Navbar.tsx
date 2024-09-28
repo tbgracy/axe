@@ -74,7 +74,7 @@ export default function Navbar({
   return (
     <nav
       className={clsx({
-        "bg-darkGrey dark:bg-gray-950 h-[100vh] flex flex-col gap-4 relative duration-300":
+        "bg-darkGrey dark:bg-black h-[100vh] flex flex-col gap-4 relative duration-300":
           true,
         "w-24": !expanded,
         "w-60": expanded,
