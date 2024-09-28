@@ -65,7 +65,7 @@ export default function DocumentManager() {
         <Content />
       </div>
       {role === "host" && (
-        <div className="flex gap-4 w-fit ml-auto absolute z-10 right-4 bottom-4">
+        <div className="flex gap-4 w-fit ml-auto mr-4 absolute z-10 right-4 bottom-4">
           <Button disabled={disableControls} onClick={toggleNewDocModal}>
             Créer un nouveau document
           </Button>
