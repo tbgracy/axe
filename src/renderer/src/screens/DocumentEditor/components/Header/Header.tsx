@@ -5,7 +5,6 @@ import Toolbar from "../Toolbar";
 import UserRow from "../UserRow";
 import DocumentTitle from "../DocumentTitle";
 import SaveButton from "./components/SaveButton";
-import SyncStateComponent, { SyncState } from "./components/SynStateComponent";
 
 export type HeaderProps = {
   users: User[];
@@ -13,7 +12,6 @@ export type HeaderProps = {
   onSave?: () => void;
   onUndo?: () => void;
   onRedo?: () => void;
-  syncState: SyncState;
 };
 
 export default function Header({
@@ -22,7 +20,6 @@ export default function Header({
   onSave,
   onRedo,
   onUndo,
-  syncState,
 }: HeaderProps) {
   return (
     <div className="bg-white w-full p-4 space-y-4 relative border-b">
@@ -49,9 +46,6 @@ export default function Header({
           </div>
         </div>
         <SaveButton onSave={onSave} />
-        <div className="mr-auto">
-          <SyncStateComponent syncState={syncState} />
-        </div>
         <UserRow users={users} />
       </div>
       <div className="">

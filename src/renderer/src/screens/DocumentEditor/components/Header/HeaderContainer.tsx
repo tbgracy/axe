@@ -16,7 +16,6 @@ export function HeaderContainer({
       onRedo={handleRedo}
       onUndo={handleUndo}
       onSave={handleSave}
-      syncState="not-synced"
     />
   );
 }
