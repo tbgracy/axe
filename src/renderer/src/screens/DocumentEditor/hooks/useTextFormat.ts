@@ -1,7 +1,7 @@
 import { Editor } from "slate";
 
 import { ReactEditor, useSlate } from "slate-react";
-import { FormatType } from "../components/Content";
+import { FormatType } from "../components/Editor";
 import { HeadingLevel } from "../components/Toolbar";
 
 function colorText(editor: Editor, color: string) {

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
 
-import Content from "./components/Content";
+import Editor from "./components/Editor";
 import { useAppSelector } from "@renderer/app/hooks";
 import axios from "axios";
 
@@ -41,6 +41,6 @@ export default function DocumentEditor() {
   if (isLoading) {
     return <LoadingAnimation />;
   } else {
-    return <Content document={document!} />;
+    return <Editor document={document!} />;
   }
 }
