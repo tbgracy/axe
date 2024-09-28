@@ -7,9 +7,9 @@ import Content from "./components/Content";
 import { useAppSelector } from "@renderer/app/hooks";
 import axios from "axios";
 
-export default function EditorScreen() {
+export default function DocumentEditor() {
   const { documentId } = useParams();
-  
+
   const role = useAppSelector((state) => state.role.role);
   const hostUrl = useAppSelector((state) => state.role.hostUrl);
 
