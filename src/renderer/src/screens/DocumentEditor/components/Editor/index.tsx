@@ -20,6 +20,7 @@ import Element from "./Element";
 import { useAppSelector } from "@renderer/app/hooks";
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
 import { useCollaboration, useEditor } from "./hooks";
+import { TextAlignment } from "../Toolbar";
 
 export default function EditorContainer({
   document,
@@ -88,7 +89,11 @@ type CustomText = {
   color?: string;
 };
 
-type CustomElement = { type: "paragraph"; children: CustomText[] };
+export type CustomElement = {
+  align?: TextAlignment;
+  type: "paragraph";
+  children: CustomText[];
+};
 
 declare module "slate" {
   interface CustomTypes {
