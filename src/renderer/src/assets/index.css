@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-div[data-slate-editor="true"]:focus {
+[data-slate-editor="true"]:focus {
   outline: none;
 }
 
@@ -64,12 +64,15 @@ ul {
 
   @font-face {
     font-family: "Galada";
+    font-style: normal;
+    font-weight: 400;
     src: url("./assets/fonts/Galada-Regular.ttf");
   }
 
   @font-face {
     font-family: "Nunito";
     font-style: normal;
+    font-weight: 400;
     src: url("./assets/fonts/Nunito-VariableFont_wght.ttf");
   }
 
@@ -79,7 +82,7 @@ ul {
     src: url("./assets/fonts/Nunito-Italic-VariableFont_wght.ttf");
   }
 
-  * {
+  *:not([data-slate-editor="true"], [data-slate-editor="true"] *) {
     font-family: 'Inter';
   }
 }

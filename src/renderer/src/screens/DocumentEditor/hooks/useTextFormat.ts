@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import { Editor, Transforms, Element, Text } from "slate";
 
 import { ReactEditor, useSlate } from "slate-react";
 import { FormatType } from "../components/Editor";
@@ -33,13 +33,28 @@ function isMarkActive(editor: Editor, format: FormatType) {
 export default function useTextFormat() {
   const editor = useSlate();
 
+  function getCurrentHeadingLevel() {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => Element.isElement(n),
+    });
+
+    if (match) {
+      const [node] = match;
+      return (
+        (node as Element & { headingLevel?: HeadingLevel }).headingLevel ||
+        "paragraph"
+      );
+    }
+    return "paragraph";
+  }
+
   const isBold = isMarkActive(editor, "bold");
   const isItalic = isMarkActive(editor, "italic");
   const isUnderlined = isMarkActive(editor, "underline");
   const currentColor = getCurrentColor(editor);
   let currentLevel: HeadingLevel;
 
-  currentLevel = "paragraph";
+  currentLevel = getCurrentHeadingLevel();
 
   function handleFormatBold() {
     toggleMark(editor, "bold");
@@ -54,7 +69,12 @@ export default function useTextFormat() {
   }
 
   function handleFontChange(fontFamily: string) {
-    console.log(fontFamily)
+    console.log(fontFamily);
+    Transforms.setNodes(
+      editor,
+      { fontFamily },
+      { match: (n) => Text.isText(n), split: true }
+    );
   }
 
   function handleColorChange(color: string) {
@@ -62,9 +82,11 @@ export default function useTextFormat() {
   }
 
   function handleHeadingChange(level: HeadingLevel) {
-    if (level === "paragraph") {
-    } else {
-    }
+    Transforms.setNodes(
+      editor,
+      { headingLevel: level },
+      { match: (n) => Element.isElement(n) }
+    );
   }
 
   return {

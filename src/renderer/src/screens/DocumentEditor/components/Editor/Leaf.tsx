@@ -5,8 +5,9 @@ export default function Leaf({ attributes, children, leaf }: RenderLeafProps) {
     <span
       {...attributes}
       style={{
-        fontWeight: leaf.bold ? "bold" : "normal",
+        fontWeight: leaf.bold ? "bold" : undefined,
         fontStyle: leaf.italic ? "italic" : "normal",
+        fontFamily: leaf.fontFamily,
         textDecoration: leaf.underline ? "underline" : "none",
         color: leaf.color ? leaf.color : undefined,
       }}

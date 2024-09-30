@@ -20,7 +20,7 @@ import Element from "./Element";
 import { useAppSelector } from "@renderer/app/hooks";
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
 import { useCollaboration, useEditor } from "./hooks";
-import { TextAlignment } from "../Toolbar";
+import { HeadingLevel, TextAlignment } from "../Toolbar";
 
 export default function EditorContainer({
   document,
@@ -87,11 +87,13 @@ type CustomText = {
   italic?: boolean;
   underline?: boolean;
   color?: string;
+  fontFamily?: string;
 };
 
 export type CustomElement = {
   align?: TextAlignment;
   type: "paragraph";
+  headingLevel?: HeadingLevel;
   children: CustomText[];
 };
 
