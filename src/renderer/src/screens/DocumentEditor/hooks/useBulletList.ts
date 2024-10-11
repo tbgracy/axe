@@ -1,38 +1,13 @@
-import { Editor, Transforms, Element } from "slate";
 import { useSlate } from "slate-react";
+import { isBlockActive, toggleBlock } from "./utils";
 
 export default function useBulletList() {
   const editor = useSlate();
 
-  function checkIfBulletList() {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => Element.isElement(n) && n.type === "list",
-    });
-
-    return !!match;
-  }
-
-  const isBulletList = checkIfBulletList();
+  const isBulletList = isBlockActive(editor, "list");
 
   function toggleBulletList() {
-    const isActive = checkIfBulletList();
-    console.log("bulletList status", isActive);
-
-    Transforms.unwrapNodes(editor, {
-      match: (n) => Element.isElement(n) && n.type === "list-item",
-      split: true,
-    });
-
-    Transforms.setNodes(
-      editor,
-      { type: isActive ? "paragraph" : "list-item" },
-      { match: (n) => Element.isElement(n) }
-    );
-
-    if (!isActive) {
-      const wrapper = { type: "list", children: [] } as Element;
-      Transforms.wrapNodes(editor, wrapper);
-    }
+    toggleBlock(editor, "list");
   }
 
   return { isBulletList, toggleBulletList };

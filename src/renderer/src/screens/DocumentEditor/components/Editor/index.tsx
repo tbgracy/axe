@@ -81,6 +81,15 @@ function EditorComponent({
 
 export type FormatType = "bold" | "italic" | "underline";
 
+export type ElementType =
+  | "paragraph"
+  | "list"
+  | "list-item"
+  | "heading-1"
+  | "heading-2"
+  | "heading-3"
+  | "heading-4";
+
 type CustomText = {
   text: string;
   bold?: boolean;
@@ -92,8 +101,7 @@ type CustomText = {
 
 export type CustomElement = {
   align?: TextAlignment;
-  type: "paragraph" | "list" | "list-item";
-  headingLevel?: HeadingLevel;
+  type: ElementType;
   children: CustomText[];
 };
 

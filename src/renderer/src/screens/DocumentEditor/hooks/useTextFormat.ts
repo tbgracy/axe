@@ -1,8 +1,9 @@
 import { Editor, Transforms, Element, Text } from "slate";
 
 import { ReactEditor, useSlate } from "slate-react";
-import { FormatType } from "../components/Editor";
+import { ElementType, FormatType } from "../components/Editor";
 import { HeadingLevel } from "../components/Toolbar";
+import { toggleBlock } from "./utils";
 
 function colorText(editor: Editor, color: string) {
   Editor.addMark(editor, "color", color);
@@ -82,11 +83,15 @@ export default function useTextFormat() {
   }
 
   function handleHeadingChange(level: HeadingLevel) {
-    Transforms.setNodes(
-      editor,
-      { headingLevel: level, type: "paragraph" },
-      { match: (n) => Element.isElement(n) }
-    );
+    const format = {
+      1: "heading-1",
+      2: "heading-2",
+      3: "heading-3",
+      4: "heading-4",
+      paragraph: "paragraph",
+    }[level] as ElementType;
+    
+    toggleBlock(editor, format);
   }
 
   return {

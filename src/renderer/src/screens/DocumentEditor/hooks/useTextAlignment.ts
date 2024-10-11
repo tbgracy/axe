@@ -1,6 +1,7 @@
 import { useSlate } from "slate-react";
-import { Editor, Element, Transforms } from "slate";
+import { Editor, Element } from "slate";
 import { TextAlignment } from "../components/Toolbar";
+import { toggleBlock } from "./utils";
 
 export default function useTextAlignment() {
   const editor = useSlate();
@@ -21,11 +22,7 @@ export default function useTextAlignment() {
   const currentAlignment = getCurrentAlignment();
 
   function setAlignment(alignment: TextAlignment) {
-    Transforms.setNodes(
-      editor,
-      { align: alignment },
-      { match: (n) => Element.isElement(n) }
-    );
+    toggleBlock(editor, alignment, true);
   }
 
   return { setAlignment, currentAlignment };
