@@ -36,15 +36,17 @@ export default function useTextFormat() {
 
   function getCurrentHeadingLevel() {
     const [match] = Editor.nodes(editor, {
-      match: (n) => Element.isElement(n),
+      match: (n) =>
+        Element.isElement(n) &&
+        (n.type === "heading-1" ||
+          n.type === "heading-2" ||
+          n.type === "heading-3" ||
+          n.type === "heading-4"),
     });
 
     if (match) {
       const [node] = match;
-      return (
-        (node as Element & { headingLevel?: HeadingLevel }).headingLevel ||
-        "paragraph"
-      );
+      return (node as Element & { type: ElementType }).type || "paragraph";
     }
     return "paragraph";
   }
@@ -53,9 +55,8 @@ export default function useTextFormat() {
   const isItalic = isMarkActive(editor, "italic");
   const isUnderlined = isMarkActive(editor, "underline");
   const currentColor = getCurrentColor(editor);
-  let currentLevel: HeadingLevel;
 
-  currentLevel = getCurrentHeadingLevel();
+  const currentLevel = getCurrentHeadingLevel();
 
   function handleFormatBold() {
     toggleMark(editor, "bold");
@@ -90,7 +91,7 @@ export default function useTextFormat() {
       4: "heading-4",
       paragraph: "paragraph",
     }[level] as ElementType;
-    
+
     toggleBlock(editor, format);
   }
 
