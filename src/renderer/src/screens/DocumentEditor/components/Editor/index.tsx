@@ -92,7 +92,7 @@ type CustomText = {
 
 export type CustomElement = {
   align?: TextAlignment;
-  type: "paragraph";
+  type: "paragraph" | "list" | "list-item";
   headingLevel?: HeadingLevel;
   children: CustomText[];
 };

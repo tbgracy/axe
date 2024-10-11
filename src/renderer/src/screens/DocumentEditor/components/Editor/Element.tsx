@@ -5,6 +5,12 @@ export default function Element({
   children,
   element,
 }: RenderElementProps) {
+  if (element.type === "list") {
+    return <ul {...attributes}>{children}</ul>;
+  } else if (element.type === "list-item") {
+    return <li {...attributes}>{children}</li>;
+  }
+
   switch (element.headingLevel) {
     case 1:
       return (

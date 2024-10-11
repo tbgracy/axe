@@ -84,7 +84,7 @@ export default function useTextFormat() {
   function handleHeadingChange(level: HeadingLevel) {
     Transforms.setNodes(
       editor,
-      { headingLevel: level },
+      { headingLevel: level, type: "paragraph" },
       { match: (n) => Element.isElement(n) }
     );
   }
