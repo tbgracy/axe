@@ -1,5 +1,6 @@
 import express from "express";
 import multer from "multer";
+import fs from "fs";
 let cors = require("cors");
 
 import { documentsService } from "./services";
@@ -30,7 +31,7 @@ if (userDataPath) {
   const upload = multer({ storage: storage });
 
   app.use(express.json());
-
+  app.use("/images", express.static(userDataPath));
   app.use(cors());
 
   app.get("/", (_, res) => {
@@ -52,10 +53,36 @@ if (userDataPath) {
     }
   });
 
-  app.post("/image", upload.single("image"), (req, res) => {
+  app.post("/images", upload.single("image"), (req, res) => {
     res.send({
       message: "Successfully uploaded files",
       filename: req.file?.filename,
+    });
+  });
+
+  app.delete("/images/:filename", async (req, res) => {
+    const fullPath = path.join(userDataPath, req.params.filename);
+    fs.unlink(fullPath, (err) => {
+      if (err) {
+        console.error(`Error deleting file: ${err.message}`);
+        if (err.code === "ENOENT") {
+          return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: `The file '${req.params.filename}' could not be found`,
+          });
+        }
+
+        return res.status(500).json({
+          status: 500,
+          error: "Internal Server Error",
+          message: "An error occurred while trying to delete the file",
+        });
+      }
+      res.send({
+        message: `Successfully deleted ${req.params.filename}`,
+      });
+      return;
     });
   });
 

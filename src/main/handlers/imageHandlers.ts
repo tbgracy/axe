@@ -26,7 +26,7 @@ async function uploadToHost(src: string, url: string) {
 
   formData.append("image", fs.createReadStream(src));
 
-  const response = await axios.post(`${url}/image`, formData);
+  const response = await axios.post(`${url}/images`, formData);
 
   return response.data["filename"];
 }
