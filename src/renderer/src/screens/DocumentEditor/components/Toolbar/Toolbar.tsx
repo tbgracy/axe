@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import {
-  AddLink,
   FormatAlignCenter,
   FormatAlignJustify,
   FormatAlignLeft,
@@ -16,6 +15,7 @@ import {
 
 import Menu from "./Menu";
 import ToolbarButton, { TextColorButton } from "./ToolbarButton";
+import { useImage } from "../../hooks";
 
 function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
@@ -73,6 +73,8 @@ export default function Toolbar({
 }: ToolbarProps) {
   const dropdownStyle = "p-2 rounded-[10px] cursor-pointer bg-gray-200";
   const colorInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageInsertion = useImage();
 
   function handleColorChange() {
     colorInputRef.current?.click();
@@ -182,14 +184,9 @@ export default function Toolbar({
       />
       <HorizontalSeparator />
       <ToolbarButton
-        tooltip={"Insérer un lien hypertexte"}
-        icon={<AddLink />}
-        onClick={() => {}}
-      />
-      <ToolbarButton
         tooltip={"Insérer une image"}
         icon={<ImageOutlined />}
-        onClick={() => {}}
+        onClick={handleImageInsertion}
       />
       <ToolbarButton
         tooltip={"Insérer un tableau"}

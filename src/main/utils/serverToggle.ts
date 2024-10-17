@@ -1,4 +1,5 @@
 import path from "path";
+import { app } from "electron";
 import { ChildProcess, fork } from "child_process";
 import findRootDir from "./findRootDir";
 import isDev from "./isDev";
@@ -9,7 +10,10 @@ let websocketServerProcess: ChildProcess | undefined;
 
 export function startServer() {
   if (!expressServerProcess) {
-    expressServerProcess = fork(path.join(__dirname, "server.js"));
+    const userDataPath = app.getPath("userData");
+    expressServerProcess = fork(path.join(__dirname, "server.js"), {
+      env: Object.assign({}, process.env, { USER_DATA_PATH: userDataPath }),
+    });
     expressServerProcess.on("message", (message) => {
       console.log("Message  from express server : ", message);
     });
