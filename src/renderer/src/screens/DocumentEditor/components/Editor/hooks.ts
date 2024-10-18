@@ -4,6 +4,7 @@ import { WebsocketProvider } from "y-websocket";
 import { useState, useEffect, useMemo } from "react";
 import { withYHistory, withYjs, YjsEditor } from "@slate-yjs/core";
 import { Descendant, createEditor, Editor, Transforms } from "slate";
+import { withImages } from "./imageExtension";
 
 export function useCollaboration(hostUrl: string, roomName: string) {
   const [connected, setConnected] = useState(false);
@@ -48,7 +49,9 @@ export function useEditor(sharedType: Y.XmlText, initialContent: string) {
   }
 
   const editor = useMemo(() => {
-    const e = withReact(withYHistory(withYjs(createEditor(), sharedType)));
+    const e = withReact(
+      withYHistory(withYjs(withImages(createEditor()), sharedType))
+    );
 
     const { normalizeNode } = e;
     e.normalizeNode = (entry) => {

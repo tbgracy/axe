@@ -20,7 +20,7 @@ import Element from "./Element";
 import { useAppSelector } from "@renderer/app/hooks";
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
 import { useCollaboration, useEditor } from "./hooks";
-import { HeadingLevel, TextAlignment } from "../Toolbar";
+import { TextAlignment } from "../Toolbar";
 
 export default function EditorContainer({
   document,
@@ -88,7 +88,8 @@ export type ElementType =
   | "heading-1"
   | "heading-2"
   | "heading-3"
-  | "heading-4";
+  | "heading-4"
+  | "image";
 
 type CustomText = {
   text: string;
@@ -102,6 +103,7 @@ type CustomText = {
 export type CustomElement = {
   align?: TextAlignment;
   type: ElementType;
+  url?: string;
   children: CustomText[];
 };
 

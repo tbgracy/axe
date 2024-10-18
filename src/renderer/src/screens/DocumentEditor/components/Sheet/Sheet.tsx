@@ -9,7 +9,7 @@ type SheetProps = {
 export default function Sheet({ document, onClick, children }: SheetProps) {
   return (
     <div
-      className="bg-white shadow-lg border p-20 mx-auto"
+      className="bg-white shadow-lg border p-20 mx-auto overflow-hidden"
       style={{
         width: `${document.width}mm`,
         height: `${document.height}mm`,

@@ -1,4 +1,5 @@
 import { RenderElementProps } from "slate-react";
+import Image from "./Image";
 
 export default function Element({
   attributes,
@@ -6,6 +7,10 @@ export default function Element({
   element,
 }: RenderElementProps) {
   switch (element.type) {
+    case "image":
+      return (
+        <Image attributes={attributes} children={children} element={element} />
+      );
     case "heading-1":
       return (
         <h1 {...attributes} style={{ textAlign: element.align }}>
