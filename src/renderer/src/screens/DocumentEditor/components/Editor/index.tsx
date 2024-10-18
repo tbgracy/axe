@@ -6,9 +6,9 @@ import {
   RenderElementProps,
 } from "slate-react";
 import * as Y from "yjs";
-import { BaseEditor } from "slate";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { HistoryEditor } from "slate-history";
+import { BaseEditor, Node as SlateNode } from "slate";
 
 import Sheet from "../Sheet";
 import Header from "../Header";
@@ -50,6 +50,16 @@ function EditorComponent({
 }) {
   const { editor, initialValue } = useEditor(sharedType, document.content);
 
+  const wordCount = useMemo(() => {
+    const text = editor.children
+      .map((node) => SlateNode.string(node))
+      .join("\n");
+
+    // Improved regex for word counting
+    const words = text.match(/\b[\w'-]+\b/g);
+    return words ? words.length : 0;
+  }, [editor.children]);
+
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
     []
@@ -73,7 +83,7 @@ function EditorComponent({
             />
           </Sheet>
         </div>
-        <Statusbar wordCount={editor.string.length} />
+        <Statusbar wordCount={wordCount} />
       </div>
     </Slate>
   );
