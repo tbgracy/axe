@@ -9,8 +9,6 @@ import {
   FormatListBulleted,
   FormatUnderlined,
   ImageOutlined,
-  Search,
-  TableChartOutlined,
 } from "@mui/icons-material";
 
 import Menu from "./Menu";
@@ -188,11 +186,6 @@ export default function Toolbar({
         icon={<ImageOutlined />}
         onClick={handleImageInsertion}
       />
-      <ToolbarButton
-        tooltip={"Insérer un tableau"}
-        icon={<TableChartOutlined />}
-        onClick={() => {}}
-      />
       <HorizontalSeparator />
       <select
         title="Taille du document"
@@ -213,11 +206,6 @@ export default function Toolbar({
         <option value="">Portrait</option>
         <option value="">Paysage</option>
       </select>
-      <ToolbarButton
-        tooltip={"Rechercher"}
-        icon={<Search />}
-        onClick={() => {}}
-      />
       <HorizontalSeparator />
       <Menu
         onDelete={onDelete}
