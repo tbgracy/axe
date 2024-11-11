@@ -61,6 +61,9 @@ const roleSlice = createSlice({
     clearErrorMessage(state) {
       state.errorMessage = undefined;
     },
+    resetRole(state) {
+      state.role = undefined;
+    },
   },
   extraReducers(builder) {
     builder
@@ -98,6 +101,6 @@ const roleSlice = createSlice({
   },
 });
 
-export const { chooseRole, clearErrorMessage } = roleSlice.actions;
+export const { chooseRole, clearErrorMessage, resetRole } = roleSlice.actions;
 
 export default roleSlice.reducer;

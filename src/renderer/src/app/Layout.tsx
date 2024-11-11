@@ -1,13 +1,18 @@
 import { useNavigate, Outlet } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
-import { useAppSelector } from "./hooks";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { resetRole } from "@renderer/screens/RoleChoice/roleSlice";
 
 export default function Layout() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.onboarding.user);
 
   function handleGoBack() {
+    if (window.location.href.endsWith("documents")) {
+      dispatch(resetRole());
+    }
     navigate(-1);
   }
 
