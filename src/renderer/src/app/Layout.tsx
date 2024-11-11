@@ -10,14 +10,12 @@ export default function Layout() {
   const user = useAppSelector((state) => state.onboarding.user);
 
   function handleGoBack() {
-    if (window.location.href.endsWith("documents")) {
+    if (window.location.href.includes("documents")) {
       dispatch(resetRole());
+      navigate("choice");
+    } else {
+      navigate(-1);
     }
-    navigate(-1);
-  }
-
-  function handleGoToHelp() {
-    navigate("help");
   }
 
   return (
@@ -26,10 +24,11 @@ export default function Layout() {
         <Navbar
           user={user}
           onGoBack={handleGoBack}
-          onGoToHelp={handleGoToHelp}
-          onGoToAbout={handleGoBack}
-          onGoToSessionManager={handleGoBack}
-          onGoToSettings={handleGoBack}
+          onGoToDocumentManager={() => navigate("documents")}
+          onGoToHelp={() => navigate("help")}
+          onGoToAbout={() => navigate("about")}
+          onGoToSessionManager={() => navigate("session-manager")}
+          onGoToSettings={() => navigate("settings")}
         />
       </div>
       <Outlet />

@@ -4,6 +4,7 @@ import {
   Settings,
   Info,
   ArrowBackIosNew,
+  FolderCopy,
 } from "@mui/icons-material";
 import clsx from "clsx";
 
@@ -21,6 +22,7 @@ type NavbarProps = {
   onGoBack: () => void;
   onGoToHelp: () => void;
   onGoToSessionManager?: () => void;
+  onGoToDocumentManager: () => void;
   onGoToSettings: () => void;
   onGoToAbout: () => void;
 };
@@ -28,6 +30,7 @@ type NavbarProps = {
 export default function Navbar({
   user,
   onGoBack,
+  onGoToDocumentManager,
   onGoToHelp,
   onGoToSessionManager,
   onGoToSettings,
@@ -38,6 +41,10 @@ export default function Navbar({
   const themeMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
 
+  function isCurrent(slug: string) {
+    return window.location.hash.slice(2) === slug;
+  }
+
   const linksData = [
     {
       icon: <ArrowBackIosNew />,
@@ -45,23 +52,32 @@ export default function Navbar({
       label: "Retour",
     },
     {
+      icon: <FolderCopy />,
+      current: window.location.href.includes("documents"),
+      onClick: onGoToDocumentManager,
+      label: "Documents",
+    },
+    {
       icon: <Help />,
-      current: true,
+      current: isCurrent("help"),
       onClick: onGoToHelp,
       label: "Aide",
     },
     onGoToSessionManager && {
       icon: <JoinInner />,
+      current: isCurrent("session-manager"),
       onClick: onGoToSessionManager,
       label: "Gestion de session",
     },
     {
       icon: <Settings />,
+      current: isCurrent("settings"),
       onClick: onGoToSettings,
       label: "Paramètres",
     },
     {
       icon: <Info />,
+      current: isCurrent("about"),
       onClick: onGoToAbout,
       label: "À propos",
     },
