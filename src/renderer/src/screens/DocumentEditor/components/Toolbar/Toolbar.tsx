@@ -14,6 +14,7 @@ import {
 import Menu from "./Menu";
 import ToolbarButton, { TextColorButton } from "./ToolbarButton";
 import { useImage } from "../../hooks";
+import useDocumentPageSettings from "./useDocumentPageSettings";
 
 function HorizontalSeparator() {
   return <span className="text-slate-500 mx-2">|</span>;
@@ -73,6 +74,8 @@ export default function Toolbar({
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageInsertion = useImage();
+
+  const {} = useDocumentPageSettings();
 
   function handleColorChange() {
     colorInputRef.current?.click();
@@ -186,26 +189,6 @@ export default function Toolbar({
         icon={<ImageOutlined />}
         onClick={handleImageInsertion}
       />
-      <HorizontalSeparator />
-      <select
-        title="Taille du document"
-        className={dropdownStyle}
-        name=""
-        id=""
-      >
-        <option value="">A5</option>
-        <option value="">A4</option>
-        <option value="">A3</option>
-      </select>
-      <select
-        title="Orientation du document"
-        className={dropdownStyle}
-        name=""
-        id=""
-      >
-        <option value="">Portrait</option>
-        <option value="">Paysage</option>
-      </select>
       <HorizontalSeparator />
       <Menu
         onDelete={onDelete}

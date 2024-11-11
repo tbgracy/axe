@@ -1,4 +1,4 @@
-import Toolbar, { TextAlignment } from "./Toolbar";
+import Toolbar, { HeadingLevel, TextAlignment } from "./Toolbar";
 
 import {
   useBulletList,
@@ -36,7 +36,7 @@ export function ToolbarContainer({ document }: { document: TextDocument }) {
       isUnderlined={isUnderlined}
       isBulletList={isBulletList}
       currentAlignment={currentAlignment as TextAlignment}
-      currentLevel={currentLevel}
+      currentLevel={currentLevel as HeadingLevel}
       onDelete={() => {}}
       onExport={() => {}}
       onPrint={handlePrint}
