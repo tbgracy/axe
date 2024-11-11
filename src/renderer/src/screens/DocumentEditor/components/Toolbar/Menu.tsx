@@ -18,7 +18,7 @@ export default function Menu({
     "flex gap-2 items-center hover:bg-gray-200 p-2 rounded-[10px]";
 
   return (
-    <div className="-ml-1 relative cursor-pointer" ref={menuRef}>
+    <div className="-ml-1 relative cursor-pointer z-50" ref={menuRef}>
       <div
         className="hover:bg-gray-200 p-1 rounded-[10px]"
         onClick={handleClick}
