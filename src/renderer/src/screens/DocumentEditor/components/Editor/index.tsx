@@ -54,11 +54,13 @@ function EditorComponent({
     const text = editor.children
       .map((node) => SlateNode.string(node))
       .join("\n");
-
-    // Improved regex for word counting
+      
     const words = text.match(/\b[\w'-]+\b/g);
     return words ? words.length : 0;
-  }, [editor.children]);
+  }, [editor]);
+
+  console.log(wordCount);
+  
 
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
