@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+import avatarPlaceholder from "./avatar-placeholder.jpg"
+
 type AvatarProps = {
   user?: User;
   expanded?: boolean;
@@ -14,7 +16,7 @@ export default function Avatar({ user, expanded = true }: AvatarProps) {
       })}
     >
       <img
-        src={user?.profilePicturePath ?? "/avatar-placeholder.jpg"}
+        src={user?.profilePicturePath ?? avatarPlaceholder}
         alt="user profile picture"
         className={clsx({
           "rounded-full object-cover": true,
