@@ -54,7 +54,7 @@ export default function Content() {
 
     if (isEmpty) {
       const placeholder =
-        filter !== "" && allDocuments.length !== 0
+        (filter !== "" && allDocuments.length !== 0) || role === "guest"
           ? {
               dark: darkNoFilterResultPlaceholder,
               light: noFilterResultPlaceholder,
@@ -63,7 +63,9 @@ export default function Content() {
       const message =
         filter !== "" && allDocuments.length !== 0
           ? "Aucun document ne correspond à ce que vous avez saisi"
-          : " Aucun document, veuillez cliquer sur l'un des bouttons ci-dessous pour en ajouter 😁.";
+          : role === "host"
+            ? " Aucun document, veuillez cliquer sur l'un des bouttons ci-dessous pour en ajouter 😁."
+            : "Aucun document disponbile, veuillez réactualiser après quelques instants 😁.";
       return (
         <div className="h-[70vh] flex flex-col items-center justify-center select-none">
           <img src={placeholder} alt="" className="h-[15rem]" />
