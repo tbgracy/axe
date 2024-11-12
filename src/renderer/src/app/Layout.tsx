@@ -10,7 +10,7 @@ export default function Layout() {
   const user = useAppSelector((state) => state.onboarding.user);
 
   function handleGoBack() {
-    if (window.location.href.includes("documents")) {
+    if (window.location.href.endsWith("documents")) {
       dispatch(resetRole());
       navigate("choice");
     } else {
