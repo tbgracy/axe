@@ -2,6 +2,7 @@ import useSave from "./useSave";
 import usePrint from "./usePrint";
 import useImage from "./useImage";
 import useHotKeys from "./useHotKeys";
+import useWordCount from "./useWordCount";
 import useTextFormat from "./useTextFormat";
 import useBulletList from "./useBulletList";
 import useTextAlignment from "./useTextAlignment";
@@ -13,4 +14,6 @@ export { useHotKeys, useHistoryActions };
 
 export { useSave };
 
-export {useImage}
+export { useImage };
+
+export { useWordCount };

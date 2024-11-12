@@ -6,9 +6,9 @@ import {
   RenderElementProps,
 } from "slate-react";
 import * as Y from "yjs";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { HistoryEditor } from "slate-history";
-import { BaseEditor, Node as SlateNode } from "slate";
+import { BaseEditor } from "slate";
 
 import Sheet from "../Sheet";
 import Header from "../Header";
@@ -21,6 +21,7 @@ import { useAppSelector } from "@renderer/app/hooks";
 import LoadingAnimation from "@renderer/components/LoadingAnimation";
 import { useCollaboration, useEditor } from "./hooks";
 import { TextAlignment } from "../Toolbar";
+import { useWordCount } from "../../hooks";
 
 export default function EditorContainer({
   document,
@@ -49,18 +50,7 @@ function EditorComponent({
   document: TextDocument;
 }) {
   const { editor, initialValue } = useEditor(sharedType, document.content);
-
-  const wordCount = useMemo(() => {
-    const text = editor.children
-      .map((node) => SlateNode.string(node))
-      .join("\n");
-      
-    const words = text.match(/\b[\w'-]+\b/g);
-    return words ? words.length : 0;
-  }, [editor]);
-
-  console.log(wordCount);
-  
+  const { wordCount, calculateWordCount } = useWordCount(editor);
 
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
@@ -82,6 +72,7 @@ function EditorComponent({
               className="h-full"
               renderLeaf={renderLeaf}
               renderElement={renderElement}
+              onKeyDown={calculateWordCount}
             />
           </Sheet>
         </div>
