@@ -7,6 +7,7 @@ import Onboarding from "../screens/Onboarding";
 import DocumentManager from "../screens/DocumentManager";
 import NotImplementedYet from "@renderer/screens/NotImplementedYet";
 import About from "@renderer/screens/About";
+import Help from "@renderer/screens/Help";
 
 const router: ReturnType<typeof createHashRouter> = createHashRouter([
   {
@@ -32,7 +33,7 @@ const router: ReturnType<typeof createHashRouter> = createHashRouter([
       },
       {
         path: "help",
-        element: <NotImplementedYet />,
+        element: <Help />,
       },
       {
         path: "session-manager",
