@@ -6,6 +6,7 @@ import RoleChoice from "../screens/RoleChoice";
 import Onboarding from "../screens/Onboarding";
 import DocumentManager from "../screens/DocumentManager";
 import NotImplementedYet from "@renderer/screens/NotImplementedYet";
+import About from "@renderer/screens/About";
 
 const router: ReturnType<typeof createHashRouter> = createHashRouter([
   {
@@ -43,7 +44,7 @@ const router: ReturnType<typeof createHashRouter> = createHashRouter([
       },
       {
         path: "about",
-        element: <NotImplementedYet />,
+        element: <About />,
       },
     ],
   },
