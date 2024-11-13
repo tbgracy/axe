@@ -13,6 +13,22 @@ export default {
         darkGrey: "#2c2c2c",
         lightGrey: "#cdcdcd",
       },
+      keyframes: {
+        floating: {
+          "0%": {
+            transform: "translate(0, 0)",
+          },
+          "50%": {
+            transform: "translate(0, 10px)",
+          },
+          "100%": {
+            transform: "translate(0, 0)",
+          },
+        },
+      },
+      animation: {
+        float: "floating 4s infinite ease-in-out",
+      },
     },
     fontFamily: {
       sans: ["Inter"],
